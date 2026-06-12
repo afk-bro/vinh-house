@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Container from '@/components/Container';
 import { createClient } from '@/lib/supabase/server';
+import DeleteForm from '@/components/admin/DeleteForm';
 import { deleteBuilding } from './actions';
 
 export default async function BuildingsList() {
@@ -20,10 +21,11 @@ export default async function BuildingsList() {
             <Link href={`/admin/buildings/${b.id}/edit`} className="text-text-primary">
               {b.name}{b.address ? ` — ${b.address}` : ''}
             </Link>
-            <form action={deleteBuilding}>
+            <DeleteForm action={deleteBuilding}
+              confirmMessage="Delete this building and ALL its rooms and photos? This cannot be undone.">
               <input type="hidden" name="id" value={b.id} />
               <button className="text-status-cancelled text-sm">Delete</button>
-            </form>
+            </DeleteForm>
           </li>
         ))}
       </ul>

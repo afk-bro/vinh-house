@@ -7,6 +7,7 @@ import { saveRoomPhotos } from '@/app/admin/rooms/actions';
 export default function RoomPhotoManager({ roomId, initial }: { roomId: string; initial: Photo[] }) {
   const [photos, setPhotos] = useState<Photo[]>(initial);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function persist(next: Photo[]) {
     setPhotos(next);
@@ -16,27 +17,35 @@ export default function RoomPhotoManager({ roomId, initial }: { roomId: string; 
   async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
     setBusy(true);
+    setError(null);
     let next = photos;
-    for (const file of files) {
-      const fd = new FormData();
-      fd.append('file', file);
-      fd.append('kind', 'rooms');
-      fd.append('ownerId', roomId);
-      const res = await fetch('/api/admin/upload-image', { method: 'POST', body: fd });
-      if (res.ok) {
-        const { url } = await res.json();
-        next = addPhoto(next, url, file.name);
+    try {
+      for (const file of files) {
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('kind', 'rooms');
+        fd.append('ownerId', roomId);
+        const res = await fetch('/api/admin/upload-image', { method: 'POST', body: fd });
+        if (res.ok) {
+          const { url } = await res.json();
+          next = addPhoto(next, url, '');
+        } else {
+          const body = await res.json().catch(() => ({}));
+          setError(`${file.name}: ${body.error ?? 'upload failed'}`);
+        }
       }
+      await persist(next);
+    } finally {
+      setBusy(false);
+      e.target.value = '';
     }
-    await persist(next);
-    setBusy(false);
-    e.target.value = '';
   }
 
   return (
     <div className="mt-4">
       <input type="file" accept="image/*" multiple onChange={onUpload} disabled={busy} />
       {busy && <p className="text-text-muted text-sm mt-2">Uploading…</p>}
+      {error && <p className="text-status-cancelled text-sm mt-2">{error}</p>}
       <div className="grid grid-cols-3 gap-3 mt-4">
         {photos.map((p) => (
           <figure key={p.url} className="relative border border-[var(--color-border-default)]">

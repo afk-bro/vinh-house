@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Container from '@/components/Container';
 import { createClient } from '@/lib/supabase/server';
+import DeleteForm from '@/components/admin/DeleteForm';
 import { updateBuilding, deleteRoom } from '../../actions';
 
 export default async function EditBuilding({ params }: { params: Promise<{ id: string }> }) {
@@ -16,12 +17,15 @@ export default async function EditBuilding({ params }: { params: Promise<{ id: s
       <h1 className="font-heading text-3xl text-text-accent mt-8">Edit building</h1>
       <form action={updateBuilding} className="mt-6 space-y-4 max-w-lg">
         <input type="hidden" name="id" value={b.id} />
-        <input name="name" defaultValue={b.name} required
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" />
-        <input name="address" defaultValue={b.address ?? ''}
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" />
-        <textarea name="description" defaultValue={b.description ?? ''} rows={4}
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" />
+        <label className="block text-text-secondary text-sm">Building name
+          <input name="name" defaultValue={b.name} required
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
+        <label className="block text-text-secondary text-sm">Address
+          <input name="address" defaultValue={b.address ?? ''}
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
+        <label className="block text-text-secondary text-sm">Description
+          <textarea name="description" defaultValue={b.description ?? ''} rows={4}
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
         <button className="px-4 py-2 bg-accent-gold text-text-inverse">Save</button>
       </form>
 
@@ -35,11 +39,12 @@ export default async function EditBuilding({ params }: { params: Promise<{ id: s
             <Link href={`/admin/rooms/${r.id}/edit`} className="text-text-primary">
               {r.name} — {r.price != null ? `$${r.price}` : 'no price'} — {r.status}
             </Link>
-            <form action={deleteRoom}>
+            <DeleteForm action={deleteRoom}
+              confirmMessage="Delete this room? This cannot be undone.">
               <input type="hidden" name="id" value={r.id} />
               <input type="hidden" name="buildingId" value={b.id} />
               <button className="text-status-cancelled text-sm">Delete</button>
-            </form>
+            </DeleteForm>
           </li>
         ))}
       </ul>

@@ -15,17 +15,22 @@ export default async function EditRoom({ params }: { params: Promise<{ id: strin
       <h1 className="font-heading text-3xl text-text-accent mt-8">Edit room</h1>
       <form action={updateRoom} className="mt-6 space-y-4 max-w-lg">
         <input type="hidden" name="id" value={r.id} />
-        <input name="name" defaultValue={r.name} required
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" />
-        <input name="price" type="number" step="0.01" defaultValue={r.price ?? ''}
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" />
-        <select name="status" defaultValue={r.status}
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary">
-          <option value="available">Available</option>
-          <option value="not_available">Not available</option>
-        </select>
-        <textarea name="description" defaultValue={r.description ?? ''} rows={4}
-          className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" />
+        <input type="hidden" name="building_id" value={r.building_id} />
+        <label className="block text-text-secondary text-sm">Room name / number
+          <input name="name" defaultValue={r.name} required
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
+        <label className="block text-text-secondary text-sm">Price
+          <input name="price" type="number" step="0.01" defaultValue={r.price ?? ''}
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
+        <label className="block text-text-secondary text-sm">Status
+          <select name="status" defaultValue={r.status}
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary">
+            <option value="available">Available</option>
+            <option value="not_available">Not available</option>
+          </select></label>
+        <label className="block text-text-secondary text-sm">Description
+          <textarea name="description" defaultValue={r.description ?? ''} rows={4}
+            className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
         <button className="px-4 py-2 bg-accent-gold text-text-inverse">Save</button>
       </form>
 
