@@ -1,6 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 import { logger } from '@/lib/logger';
+import { isAuthPage } from '@/lib/admin/constants';
 
 export async function updateSession(request: NextRequest) {
     // Fail fast with clear error if env vars are missing
@@ -56,9 +57,9 @@ export async function updateSession(request: NextRequest) {
     // Refreshing the auth token
     const { data: { user } } = await supabase.auth.getUser();
 
-    // Protect admin routes (but exclude /admin/login itself)
+    // Protect admin routes (but exclude all auth pages: login, forgot-password, update-password)
     if (request.nextUrl.pathname.startsWith('/admin') &&
-        request.nextUrl.pathname !== '/admin/login' &&
+        !isAuthPage(request.nextUrl.pathname) &&
         !user) {
         const url = request.nextUrl.clone();
         url.pathname = '/admin/login';

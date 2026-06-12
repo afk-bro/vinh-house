@@ -71,8 +71,8 @@ export default function AuthCallbackPage() {
           return;
         }
 
-        // Check if this is an invite or recovery flow
-        const type = params.get("type");
+        // Check if this is an invite or recovery flow (type may be in query or hash)
+        const type = params.get("type") ?? new URLSearchParams(window.location.hash.substring(1)).get("type");
         if (type === "recovery" || type === "invite") {
           router.replace("/admin/update-password");
           return;
