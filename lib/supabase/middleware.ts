@@ -14,7 +14,7 @@ export async function updateSession(request: NextRequest) {
         });
         throw new Error(
             'Supabase configuration error: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be defined. ' +
-            'Check your .env.test file (for tests) or .env.local file (for development).'
+            'Check your .env.local (development) or .env.production (production) file.'
         );
     }
 
