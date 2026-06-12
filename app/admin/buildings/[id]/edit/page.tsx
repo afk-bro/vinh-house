@@ -2,7 +2,9 @@ import Link from 'next/link';
 import Container from '@/components/Container';
 import { createClient } from '@/lib/supabase/server';
 import DeleteForm from '@/components/admin/DeleteForm';
-import { updateBuilding, deleteRoom } from '../../actions';
+import PhotoManager from '@/components/admin/PhotoManager';
+import { updateBuilding, deleteRoom, saveBuildingPhotos } from '../../actions';
+import type { Photo } from '@/lib/photos';
 
 export default async function EditBuilding({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -28,6 +30,9 @@ export default async function EditBuilding({ params }: { params: Promise<{ id: s
             className="w-full p-2 bg-surface-card border border-[var(--color-border-default)] text-text-primary" /></label>
         <button className="px-4 py-2 bg-accent-gold text-text-inverse">Save</button>
       </form>
+
+      <h2 className="font-heading text-2xl text-text-accent mt-10">Photos</h2>
+      <PhotoManager kind="buildings" ownerId={b.id} initial={(b.photos ?? []) as Photo[]} save={saveBuildingPhotos} />
 
       <div className="flex items-center justify-between mt-10">
         <h2 className="font-heading text-2xl text-text-accent">Rooms</h2>

@@ -1,7 +1,7 @@
 import Container from '@/components/Container';
 import { createClient } from '@/lib/supabase/server';
-import { updateRoom } from '../../actions';
-import RoomPhotoManager from '@/components/admin/RoomPhotoManager';
+import { updateRoom, saveRoomPhotos } from '../../actions';
+import PhotoManager from '@/components/admin/PhotoManager';
 import type { Photo } from '@/lib/photos';
 
 export default async function EditRoom({ params }: { params: Promise<{ id: string }> }) {
@@ -35,7 +35,7 @@ export default async function EditRoom({ params }: { params: Promise<{ id: strin
       </form>
 
       <h2 className="font-heading text-2xl text-text-accent mt-10">Photos</h2>
-      <RoomPhotoManager roomId={r.id} initial={(r.photos ?? []) as Photo[]} />
+      <PhotoManager kind="rooms" ownerId={r.id} initial={(r.photos ?? []) as Photo[]} save={saveRoomPhotos} />
     </Container>
   );
 }

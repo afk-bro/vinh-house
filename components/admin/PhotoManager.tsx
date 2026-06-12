@@ -2,16 +2,25 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { addPhoto, removePhoto, setCover, type Photo } from '@/lib/photos';
-import { saveRoomPhotos } from '@/app/admin/rooms/actions';
 
-export default function RoomPhotoManager({ roomId, initial }: { roomId: string; initial: Photo[] }) {
+export default function PhotoManager({
+  kind,
+  ownerId,
+  initial,
+  save,
+}: {
+  kind: 'rooms' | 'buildings';
+  ownerId: string;
+  initial: Photo[];
+  save: (ownerId: string, photos: Photo[]) => Promise<void>;
+}) {
   const [photos, setPhotos] = useState<Photo[]>(initial);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function persist(next: Photo[]) {
     setPhotos(next);
-    await saveRoomPhotos(roomId, next);
+    await save(ownerId, next);
   }
 
   async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -23,8 +32,8 @@ export default function RoomPhotoManager({ roomId, initial }: { roomId: string; 
       for (const file of files) {
         const fd = new FormData();
         fd.append('file', file);
-        fd.append('kind', 'rooms');
-        fd.append('ownerId', roomId);
+        fd.append('kind', kind);
+        fd.append('ownerId', ownerId);
         const res = await fetch('/api/admin/upload-image', { method: 'POST', body: fd });
         if (res.ok) {
           const { url } = await res.json();
