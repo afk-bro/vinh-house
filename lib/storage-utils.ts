@@ -8,10 +8,14 @@ import { logger } from "@/lib/logger";
 /**
  * Secure storage key for a listing photo.
  * Format: <kind>/<ownerId>/<uuid>.<ext>  e.g. rooms/<roomId>/<uuid>.jpg
+ *
+ * `ext` must come from a validated MIME type (see getExtensionFromMimeType),
+ * never from a user-controlled filename. It is sanitized defensively here so a
+ * hostile value cannot escape the structural `<kind>/<ownerId>/` prefix.
  */
-export function listingPhotoKey(kind: 'rooms' | 'buildings', ownerId: string, filename: string): string {
-  const ext = filename.split('.').pop()?.toLowerCase() || 'jpg';
-  return `${kind}/${ownerId}/${randomUUID()}.${ext}`;
+export function listingPhotoKey(kind: 'rooms' | 'buildings', ownerId: string, ext: string): string {
+  const safeExt = ext.replace(/[^a-z0-9]/gi, '').toLowerCase() || 'jpg';
+  return `${kind}/${ownerId}/${randomUUID()}.${safeExt}`;
 }
 
 /**
