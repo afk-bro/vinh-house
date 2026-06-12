@@ -21,6 +21,7 @@ export default async function BuildingDetail({ params }: { params: Promise<{ id:
           <RoomCard key={r.id} room={{ ...r, photos: (r.photos ?? []) as Photo[] }} />
         ))}
       </div>
+      {!rooms?.length && <p className="text-text-muted mt-8">No rooms listed yet.</p>}
     </Container>
   );
 }

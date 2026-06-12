@@ -19,6 +19,7 @@ export default async function Home() {
             <Link key={b.id} href={`/buildings/${b.id}`}
               className="block border border-[var(--color-border-default)] bg-surface-card">
               {cover && <Image src={cover.url} alt={cover.alt || b.name} width={480} height={300}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover w-full h-48" />}
               <div className="p-4">
                 <h2 className="font-heading text-2xl text-text-primary">{b.name}</h2>
@@ -28,6 +29,7 @@ export default async function Home() {
           );
         })}
       </div>
+      {!buildings?.length && <p className="text-text-muted mt-8">No listings yet — check back soon.</p>}
     </Container>
   );
 }

@@ -10,10 +10,11 @@ export default function RoomCard({ room }: { room: Room }) {
   return (
     <Link href={`/rooms/${room.id}`} className="block relative border border-[var(--color-border-default)] bg-surface-card">
       {cover && <Image src={cover.url} alt={cover.alt || room.name} width={480} height={320}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         className="object-cover w-full h-52" />}
       {room.price != null && (
         <span className="absolute top-3 left-3 px-3 py-1 bg-accent-gold text-text-inverse text-sm font-medium rounded-full">
-          ${room.price}
+          ${room.price.toLocaleString()}
         </span>
       )}
       <span
