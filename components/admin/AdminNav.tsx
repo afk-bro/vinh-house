@@ -57,7 +57,7 @@ export function AdminNav({ userEmail, onLogout }: AdminNavProps) {
     return (
       <nav className="fixed bottom-0 left-0 right-0 z-50 bg-brand-forest border-t border-[var(--color-border-strong)] safe-area-inset-bottom">
         <div className="flex items-center justify-around h-16 px-2">
-          {navItems.slice(0, 4).map((item) => {
+          {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item);
 
@@ -84,6 +84,7 @@ export function AdminNav({ userEmail, onLogout }: AdminNavProps) {
             onClick={onLogout}
             className="flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-colors text-accent-beige/60 hover:text-accent-beige"
             title="Logout"
+            aria-label="Logout"
           >
             <LogOut className="w-5 h-5" />
             <span className="text-[10px] font-medium">Logout</span>
