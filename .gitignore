@@ -44,5 +44,6 @@ yarn-error.log*
 /playwright-report/
 /playwright/.cache/
 
-# raw client source assets (kept local; not committed)
-/public/Phap_photos/
+# raw client originals (kept local; not committed) — optimized set lives in /public/Phap_photos
+/public/Phap_photos_raw/
+/public/Da_Nang_skyline.jpg

@@ -3,6 +3,10 @@ import Container from '@/components/Container';
 import { createClient } from '@/lib/supabase/server';
 import DeleteForm from '@/components/admin/DeleteForm';
 import PhotoManager from '@/components/admin/PhotoManager';
+
+// Authed CRUD page — never statically prerendered, so the public build does not
+// require Supabase env vars (admin is dormant/out of scope for now).
+export const dynamic = 'force-dynamic';
 import { updateBuilding, deleteRoom, saveBuildingPhotos } from '../../actions';
 import type { Photo } from '@/lib/photos';
 

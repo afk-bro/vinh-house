@@ -4,6 +4,10 @@ import { createClient } from '@/lib/supabase/server';
 import DeleteForm from '@/components/admin/DeleteForm';
 import { deleteBuilding } from './actions';
 
+// Authed CRUD page — never statically prerendered, so the public build does not
+// require Supabase env vars (admin is dormant/out of scope for now).
+export const dynamic = 'force-dynamic';
+
 export default async function BuildingsList() {
   const supabase = await createClient();
   const { data: buildings } = await supabase

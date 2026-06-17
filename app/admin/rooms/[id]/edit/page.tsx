@@ -4,6 +4,10 @@ import { updateRoom, saveRoomPhotos } from '../../actions';
 import PhotoManager from '@/components/admin/PhotoManager';
 import type { Photo } from '@/lib/photos';
 
+// Authed CRUD page — never statically prerendered, so the public build does not
+// require Supabase env vars (admin is dormant/out of scope for now).
+export const dynamic = 'force-dynamic';
+
 export default async function EditRoom({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const supabase = await createClient();

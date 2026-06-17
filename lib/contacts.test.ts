@@ -53,3 +53,36 @@ describe('mailtoUrl', () => {
     expect(mailtoUrl('')).toBeNull();
   });
 });
+
+import { telUrl } from './contacts';
+
+describe('whatsappUrl with message', () => {
+  it('appends an encoded text query when a message is given', () => {
+    expect(whatsappUrl('+84 92 442 22 99', 'Hi there')).toBe(
+      'https://wa.me/84924422299?text=Hi%20there',
+    );
+  });
+  it('omits the query when no message is given', () => {
+    expect(whatsappUrl('+84 92 442 22 99')).toBe('https://wa.me/84924422299');
+  });
+});
+
+describe('telUrl', () => {
+  it('builds a tel link preserving a leading +', () => {
+    expect(telUrl('+84 92 442 22 99')).toBe('tel:+84924422299');
+  });
+  it('builds a tel link without + when none present', () => {
+    expect(telUrl('0924 422 299')).toBe('tel:0924422299');
+  });
+  it('returns null for empty', () => {
+    expect(telUrl('')).toBeNull();
+  });
+});
+
+describe('mailtoUrl with body', () => {
+  it('encodes subject and body', () => {
+    expect(mailtoUrl('a@b.com', 'Subj', 'Body text')).toBe(
+      'mailto:a@b.com?subject=Subj&body=Body%20text',
+    );
+  });
+});
