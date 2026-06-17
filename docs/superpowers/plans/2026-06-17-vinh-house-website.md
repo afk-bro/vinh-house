@@ -665,6 +665,77 @@ git commit -m "feat: pure content validation (drift, slugs, covers, coming-soon)
 
 ---
 
+### Task A7: Centralized UI strings
+
+**Files:**
+- Create: `lib/content/strings.ts`
+
+All user-facing UI copy lives here so a later translation pass is a clean copy. Components/pages import `t` and never hardcode display literals (proper nouns shown from data — e.g. contact values, language endonyms — are exempt). No test (data module).
+
+- [ ] **Step 1: Write the strings module**
+
+```ts
+// lib/content/strings.ts
+/** All English UI copy. Translate by copying this object per locale later. */
+export const t = {
+  brand: {
+    name: 'Vĩnh House',
+    subtitle: 'Apartments and Hotel Rentals — Da Nang',
+    footerTagline:
+      'Direct booked boutique apartments and hotels in Da Nang. Book direct, pay less, message the owner.',
+  },
+  nav: {
+    buildings: 'Buildings',
+    scooterRental: 'Scooter Rental',
+    bookNow: 'Book now',
+    selectLanguage: 'Select language',
+    comingSoon: 'Coming soon',
+  },
+  booking: { whatsapp: 'WhatsApp', phone: 'Phone', facebook: 'Facebook', email: 'Email' },
+  hero: { browse: 'Browse our buildings' },
+  valueProps: [
+    { title: 'Book direct, pay less', body: 'No platform fees or middlemen — you deal straight with us.' },
+    { title: 'Message the owner directly', body: 'Questions answered by the people who run the buildings.' },
+    { title: 'Local, Da Nang–based', body: 'On the ground in Da Nang, ready to help you settle in.' },
+  ],
+  scooter: {
+    title: 'Getting around Da Nang',
+    body: 'Rent a scooter and explore the city and coast at your own pace.',
+    cta: 'Scooter rentals',
+  },
+  buildings: {
+    heading: 'Our buildings',
+    comingSoonShort: 'Details coming soon',
+    roomType: 'room type',
+    roomTypes: 'room types',
+  },
+  building: {
+    viewOnMaps: 'View on Google Maps →',
+    comingSoonTitle: 'Details coming soon',
+    comingSoonBody: "We're preparing the listings for this building.",
+  },
+  room: { available: 'Available', notAvailable: 'Not available' },
+  cta: {
+    readyToBook: 'Ready to book?',
+    readyToBookBody: "Message us directly — we'll help you find the right room.",
+  },
+} as const;
+```
+
+- [ ] **Step 2: Verify compile**
+
+Run: `npx tsc --noEmit`
+Expected: no errors in `lib/content/strings.ts`.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add lib/content/strings.ts
+git commit -m "feat: centralized UI strings module"
+```
+
+---
+
 ## Phase B — Images & site metadata
 
 ### Task B1: Reorganize photos into raw (ignored) + committed conventions
@@ -965,10 +1036,11 @@ git commit -m "feat: resolved content API merging metadata + disk images"
 import { useEffect, useRef, useState } from 'react';
 import type { Contacts } from '@/lib/content/types';
 import { buildInquiryLinks } from '@/lib/content/inquiry';
+import { t } from '@/lib/content/strings';
 
 type Props = { contacts: Contacts; message: string; label?: string };
 
-export default function BookNowMenu({ contacts, message, label = 'Book now' }: Props) {
+export default function BookNowMenu({ contacts, message, label = t.nav.bookNow }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const links = buildInquiryLinks(contacts, message);
@@ -997,10 +1069,10 @@ export default function BookNowMenu({ contacts, message, label = 'Book now' }: P
           role="menu"
           className="absolute right-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl"
         >
-          {links.whatsapp && <a role="menuitem" className={item} href={links.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>}
-          {links.phone && <a role="menuitem" className={item} href={links.phone}>Phone</a>}
-          {links.facebook && <a role="menuitem" className={item} href={links.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>}
-          {links.email && <a role="menuitem" className={item} href={links.email}>Email</a>}
+          {links.whatsapp && <a role="menuitem" className={item} href={links.whatsapp} target="_blank" rel="noopener noreferrer">{t.booking.whatsapp}</a>}
+          {links.phone && <a role="menuitem" className={item} href={links.phone}>{t.booking.phone}</a>}
+          {links.facebook && <a role="menuitem" className={item} href={links.facebook} target="_blank" rel="noopener noreferrer">{t.booking.facebook}</a>}
+          {links.email && <a role="menuitem" className={item} href={links.email}>{t.booking.email}</a>}
         </div>
       )}
     </div>
@@ -1030,6 +1102,7 @@ git commit -m "feat: BookNowMenu dropdown (contextual inquiry links)"
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { t } from '@/lib/content/strings';
 
 const LANGS = [
   { code: 'en', flag: '🇬🇧', name: 'English', active: true },
@@ -1057,7 +1130,7 @@ export default function LanguageMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        aria-label="Select language"
+        aria-label={t.nav.selectLanguage}
         className="rounded-lg px-2 py-1.5 text-xl leading-none hover:bg-surface-elevated"
       >
         🇬🇧
@@ -1074,7 +1147,7 @@ export default function LanguageMenu() {
               }`}
             >
               <span><span className="mr-2">{l.flag}</span>{l.name}</span>
-              {!l.active && <span className="text-xs italic">Coming soon</span>}
+              {!l.active && <span className="text-xs italic">{t.nav.comingSoon}</span>}
             </div>
           ))}
         </div>
@@ -1107,6 +1180,7 @@ git commit -m "feat: LanguageMenu (EN active, others coming soon)"
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { t } from '@/lib/content/strings';
 
 type Item = { slug: string; name: string; comingSoon: boolean };
 
@@ -1130,7 +1204,7 @@ export default function BuildingsMenu({ items }: { items: Item[] }) {
         aria-expanded={open}
         className="rounded-lg px-3 py-2 text-sm text-text-primary hover:bg-surface-elevated"
       >
-        Buildings ▾
+        {t.nav.buildings} ▾
       </button>
       {open && (
         <div role="menu" className="absolute left-0 z-50 mt-2 w-56 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
@@ -1143,7 +1217,7 @@ export default function BuildingsMenu({ items }: { items: Item[] }) {
               onClick={() => setOpen(false)}
             >
               {b.name}
-              {b.comingSoon && <span className="text-xs italic text-text-muted">Coming soon</span>}
+              {b.comingSoon && <span className="text-xs italic text-text-muted">{t.nav.comingSoon}</span>}
             </Link>
           ))}
         </div>
@@ -1179,6 +1253,7 @@ import LanguageMenu from './LanguageMenu';
 import BookNowMenu from './BookNowMenu';
 import { contacts, buildingNav } from '@/lib/content/site';
 import { inquiryMessage } from '@/lib/content/inquiry';
+import { t } from '@/lib/content/strings';
 
 export default function Navbar() {
   return (
@@ -1187,8 +1262,8 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={40} height={40} className="rounded" />
           <span className="leading-tight">
-            <span className="block font-heading text-xl text-text-accent">Vĩnh House</span>
-            <span className="block text-[11px] text-text-muted">Apartments and Hotel Rentals — Da Nang</span>
+            <span className="block font-heading text-xl text-text-accent">{t.brand.name}</span>
+            <span className="block text-[11px] text-text-muted">{t.brand.subtitle}</span>
           </span>
         </Link>
 
@@ -1200,7 +1275,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="hidden rounded-lg px-3 py-2 text-sm text-text-primary hover:bg-surface-elevated sm:block"
           >
-            Scooter Rental
+            {t.nav.scooterRental}
           </a>
           <LanguageMenu />
           <BookNowMenu contacts={contacts} message={inquiryMessage({})} />
@@ -1235,6 +1310,7 @@ git commit -m "feat: Navbar with buildings/language/book-now and scooter link"
 import Image from 'next/image';
 import { contacts } from '@/lib/content/site';
 import { whatsappUrl, telUrl, mailtoUrl } from '@/lib/contacts';
+import { t } from '@/lib/content/strings';
 
 export default function Footer() {
   const wa = whatsappUrl(contacts.whatsapp);
@@ -1247,17 +1323,15 @@ export default function Footer() {
         <div className="flex items-start gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
           <div>
-            <p className="font-heading text-2xl text-text-accent">Vĩnh House</p>
-            <p className="mt-1 max-w-md text-sm text-text-muted">
-              Direct booked boutique apartments and hotels in Da Nang. Book direct, pay less, message the owner.
-            </p>
+            <p className="font-heading text-2xl text-text-accent">{t.brand.name}</p>
+            <p className="mt-1 max-w-md text-sm text-text-muted">{t.brand.footerTagline}</p>
           </div>
         </div>
         <nav className="flex flex-col gap-2">
           {mail && <a className={link} href={mail}>{contacts.email}</a>}
           {tel && <a className={link} href={tel}>{contacts.phone}</a>}
-          {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer">WhatsApp</a>}
-          {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>}
+          {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer">{t.booking.whatsapp}</a>}
+          {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer">{t.booking.facebook}</a>}
         </nav>
       </div>
     </footer>
@@ -1291,6 +1365,7 @@ import Image from 'next/image';
 import BookNowMenu from './BookNowMenu';
 import { contacts } from '@/lib/content/site';
 import { inquiryMessage } from '@/lib/content/inquiry';
+import { t } from '@/lib/content/strings';
 
 export default function Hero() {
   return (
@@ -1298,12 +1373,12 @@ export default function Hero() {
       <Image src="/hero.jpg" alt="Da Nang skyline" fill priority sizes="100vw" className="object-cover" />
       <div className="absolute inset-0 bg-brand-forest/70" />
       <div className="relative z-10 px-4 text-center">
-        <h1 className="font-heading text-5xl text-text-accent sm:text-6xl">Vĩnh House</h1>
-        <p className="mt-3 text-lg text-text-primary">Apartments and Hotel Rentals — Da Nang</p>
+        <h1 className="font-heading text-5xl text-text-accent sm:text-6xl">{t.brand.name}</h1>
+        <p className="mt-3 text-lg text-text-primary">{t.brand.subtitle}</p>
         <div className="mt-8 flex items-center justify-center gap-4">
           <BookNowMenu contacts={contacts} message={inquiryMessage({})} />
           <a href="#buildings" className="rounded-lg border border-accent-gold px-5 py-2.5 text-sm text-text-accent hover:bg-surface-elevated">
-            Browse our buildings
+            {t.hero.browse}
           </a>
         </div>
       </div>
@@ -1317,19 +1392,14 @@ export default function Hero() {
 ```tsx
 // components/ValueProps.tsx
 import Container from './Container';
-
-const PROPS = [
-  { title: 'Book direct, pay less', body: 'No platform fees or middlemen — you deal straight with us.' },
-  { title: 'Message the owner directly', body: 'Questions answered by the people who run the buildings.' },
-  { title: 'Local, Da Nang–based', body: 'On the ground in Da Nang, ready to help you settle in.' },
-];
+import { t } from '@/lib/content/strings';
 
 export default function ValueProps() {
   return (
     <section className="py-16">
       <Container>
         <div className="grid gap-8 sm:grid-cols-3">
-          {PROPS.map((p) => (
+          {t.valueProps.map((p) => (
             <div key={p.title}>
               <h3 className="font-heading text-2xl text-text-accent">{p.title}</h3>
               <p className="mt-2 text-text-secondary">{p.body}</p>
@@ -1348,6 +1418,7 @@ export default function ValueProps() {
 // components/ScooterBand.tsx
 import Container from './Container';
 import { contacts } from '@/lib/content/site';
+import { t } from '@/lib/content/strings';
 
 export default function ScooterBand() {
   return (
@@ -1355,8 +1426,8 @@ export default function ScooterBand() {
       <Container>
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h3 className="font-heading text-2xl text-text-accent">Getting around Da Nang</h3>
-            <p className="mt-1 text-text-secondary">Rent a scooter and explore the city and coast at your own pace.</p>
+            <h3 className="font-heading text-2xl text-text-accent">{t.scooter.title}</h3>
+            <p className="mt-1 text-text-secondary">{t.scooter.body}</p>
           </div>
           <a
             href={contacts.motorbikeUrl}
@@ -1364,7 +1435,7 @@ export default function ScooterBand() {
             rel="noopener noreferrer"
             className="rounded-lg bg-accent-gold px-5 py-2.5 font-medium text-text-inverse hover:brightness-105"
           >
-            Scooter rentals
+            {t.scooter.cta}
           </a>
         </div>
       </Container>
@@ -1381,13 +1452,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Container from './Container';
 import { getBuildings } from '@/lib/content';
+import { t } from '@/lib/content/strings';
 
 export default function BuildingShowcase() {
   const buildings = getBuildings();
   return (
     <section id="buildings" className="py-16">
       <Container>
-        <h2 className="font-heading text-4xl text-text-accent">Our buildings</h2>
+        <h2 className="font-heading text-4xl text-text-accent">{t.buildings.heading}</h2>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {buildings.map((b) => (
             <Link
@@ -1404,7 +1476,9 @@ export default function BuildingShowcase() {
                 <h3 className="font-heading text-2xl text-text-primary">{b.name}</h3>
                 <p className="text-sm text-text-muted">{b.address}</p>
                 <p className="mt-2 text-sm text-text-accent">
-                  {b.comingSoon ? 'Details coming soon' : `${b.resolvedRooms.length} room type${b.resolvedRooms.length === 1 ? '' : 's'}`}
+                  {b.comingSoon
+                    ? t.buildings.comingSoonShort
+                    : `${b.resolvedRooms.length} ${b.resolvedRooms.length === 1 ? t.buildings.roomType : t.buildings.roomTypes}`}
                 </p>
               </div>
             </Link>
@@ -1521,6 +1595,7 @@ import Container from '@/components/Container';
 import BookNowMenu from '@/components/BookNowMenu';
 import { contacts } from '@/lib/content/site';
 import { inquiryMessage } from '@/lib/content/inquiry';
+import { t } from '@/lib/content/strings';
 
 export default function Home() {
   return (
@@ -1532,8 +1607,8 @@ export default function Home() {
       <section className="py-16">
         <Container>
           <div className="flex flex-col items-center gap-4 text-center">
-            <h2 className="font-heading text-3xl text-text-accent">Ready to book?</h2>
-            <p className="text-text-secondary">Message us directly — we&apos;ll help you find the right room.</p>
+            <h2 className="font-heading text-3xl text-text-accent">{t.cta.readyToBook}</h2>
+            <p className="text-text-secondary">{t.cta.readyToBookBody}</p>
             <BookNowMenu contacts={contacts} message={inquiryMessage({})} />
           </div>
         </Container>
@@ -1571,6 +1646,7 @@ import BookNowMenu from '@/components/BookNowMenu';
 import { getBuildings, getBuilding } from '@/lib/content';
 import { contacts } from '@/lib/content/site';
 import { inquiryMessage } from '@/lib/content/inquiry';
+import { t } from '@/lib/content/strings';
 
 export function generateStaticParams() {
   return getBuildings().map((b) => ({ buildingSlug: b.slug }));
@@ -1600,7 +1676,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ build
         {b.googleMapsUrl && (
           <a href={b.googleMapsUrl} target="_blank" rel="noopener noreferrer"
             className="mt-2 inline-block text-sm text-text-accent hover:underline">
-            View on Google Maps →
+            {t.building.viewOnMaps}
           </a>
         )}
         <p className="mt-4 max-w-2xl text-text-secondary">{b.blurb}</p>
@@ -1608,8 +1684,8 @@ export default async function BuildingPage({ params }: { params: Promise<{ build
 
       {b.comingSoon ? (
         <div className="my-12 rounded-lg border border-[var(--color-border-default)] bg-surface-card p-8 text-center">
-          <p className="font-heading text-2xl text-text-accent">Details coming soon</p>
-          <p className="mt-2 text-text-secondary">We&apos;re preparing the listings for this building.</p>
+          <p className="font-heading text-2xl text-text-accent">{t.building.comingSoonTitle}</p>
+          <p className="mt-2 text-text-secondary">{t.building.comingSoonBody}</p>
           <div className="mt-6 flex justify-center">
             <BookNowMenu contacts={contacts} message={inquiryMessage({ building: b.name })} />
           </div>
@@ -1626,7 +1702,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ build
                 <span className="absolute left-3 top-3 rounded-full bg-accent-gold px-3 py-1 text-sm font-medium text-text-inverse">{r.price}</span>
                 <span className="absolute right-3 top-3 rounded-full px-2 py-1 text-xs"
                   style={{ background: r.status === 'available' ? 'var(--color-status-confirmed-bg)' : 'var(--color-status-cancelled-bg)' }}>
-                  {r.status === 'available' ? 'Available' : 'Not available'}
+                  {r.status === 'available' ? t.room.available : t.room.notAvailable}
                 </span>
                 <div className="p-4"><h3 className="font-heading text-xl text-text-primary">{r.name}</h3></div>
               </Link>
@@ -1717,6 +1793,7 @@ import BookNowMenu from '@/components/BookNowMenu';
 import { getBuildings, getBuilding, getRoom } from '@/lib/content';
 import { contacts } from '@/lib/content/site';
 import { inquiryMessage } from '@/lib/content/inquiry';
+import { t } from '@/lib/content/strings';
 
 export function generateStaticParams() {
   return getBuildings()
@@ -1758,7 +1835,7 @@ export default async function RoomPage({ params }: { params: Promise<{ buildingS
         <h1 className="font-heading text-4xl text-text-accent">{room.name}</h1>
         <span className="rounded-full bg-accent-gold px-3 py-1 text-text-inverse">{room.price}</span>
         <span className={available ? 'text-status-confirmed' : 'text-status-cancelled'}>
-          {available ? 'Available' : 'Not available'}
+          {available ? t.room.available : t.room.notAvailable}
         </span>
       </div>
       <p className="mt-4 max-w-2xl text-text-secondary">{room.blurb}</p>
@@ -1955,5 +2032,5 @@ git commit -m "fix: address issues found during build/manual verification" || ec
 - Provide Azure Apartments content (rooms, photos, info), then remove its `comingSoon` flag and add room metadata + folders.
 - Provide real room prices, blurbs, availability.
 - Sign-off on "Book direct, pay less" copy.
-- Translations for VI / KO / ZH / RU (UI strings are English-only for now; centralizing into a `strings.ts` is a follow-up when translation begins).
+- Translations for VI / KO / ZH / RU — all UI copy is centralized in `lib/content/strings.ts` (Task A7), so each locale is a copy of that object plus wiring the language dropdown to switch.
 ```
