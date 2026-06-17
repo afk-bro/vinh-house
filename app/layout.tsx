@@ -10,6 +10,7 @@ const heading = Cormorant_Garamond({
 const body = Inter({ subsets: ['latin'], variable: '--font-body-loaded' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example'),
   title: { default: 'Vĩnh House — Apartments and Hotel Rentals in Da Nang', template: '%s — Vĩnh House Da Nang' },
   description: 'Direct booked boutique apartments and hotels in Da Nang. Book direct, pay less, message the owner.',
   icons: { icon: '/logo.png' },
