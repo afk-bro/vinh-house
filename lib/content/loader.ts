@@ -11,11 +11,14 @@ function isDir(p: string): boolean {
 /** Image filenames in a folder, sorted alphabetically but with cover.jpg first. */
 export function listImages(dir: string): string[] {
   if (!isDir(dir)) return [];
-  const files = fs
+  return fs
     .readdirSync(dir)
     .filter((f) => IMAGE_RE.test(f))
-    .sort();
-  return files.sort((a, b) => (a === 'cover.jpg' ? -1 : b === 'cover.jpg' ? 1 : 0));
+    .sort((a, b) => {
+      if (a === 'cover.jpg') return b === 'cover.jpg' ? 0 : -1;
+      if (b === 'cover.jpg') return 1;
+      return a.localeCompare(b);
+    });
 }
 
 export type DiskRoom = { folder: string; hasCover: boolean };

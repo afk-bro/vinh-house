@@ -26,7 +26,7 @@ contact-form processing. See `CLAUDE.md` for the full scope contract.
 
 ### Prerequisites
 
-- **Node.js 18+** (20+ recommended) and npm.
+- **Node.js 20.9+** and npm (required by Next.js 16 and the image-optimization tooling).
 - A **Supabase project** (free tier is fine) — you'll need its API keys.
 
 ### 1. Install dependencies
