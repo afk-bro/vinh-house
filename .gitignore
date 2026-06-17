@@ -43,3 +43,6 @@ yarn-error.log*
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# raw client source assets (kept local; not committed)
+/public/Phap_photos/
