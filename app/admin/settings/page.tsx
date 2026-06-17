@@ -2,6 +2,10 @@ import Container from '@/components/Container';
 import { createClient } from '@/lib/supabase/server';
 import { updateSettings } from './actions';
 
+// Authed CRUD page — never statically prerendered, so the public build does not
+// require Supabase env vars (admin is dormant/out of scope for now).
+export const dynamic = 'force-dynamic';
+
 export default async function SettingsPage() {
   const supabase = await createClient();
   const { data: s } = await supabase.from('site_settings').select('*').limit(1).single();
