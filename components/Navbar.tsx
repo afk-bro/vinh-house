@@ -9,7 +9,8 @@ import { t } from '@/lib/content/strings';
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-border-subtle)] bg-navbar-forest">
+    <header className="sticky top-0 z-40 border-b border-[var(--color-border-default)] bg-navbar-forest/95 shadow-sm backdrop-blur">
+
       <nav className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={40} height={40} className="rounded" />

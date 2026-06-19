@@ -15,21 +15,30 @@ export default function BuildingShowcase() {
             <Link
               key={b.slug}
               href={`/buildings/${b.slug}`}
-              className="block overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card"
+              className="group block overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               {b.cover && (
                 <Image src={b.cover.src} alt={b.cover.alt} width={480} height={300}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="h-48 w-full object-cover" />
               )}
-              <div className="p-4">
-                <h3 className="font-heading text-2xl text-text-primary">{b.name}</h3>
-                <p className="text-sm text-text-muted">{b.address}</p>
-                <p className="mt-2 text-sm text-text-accent">
-                  {b.comingSoon
-                    ? t.buildings.comingSoonShort
-                    : `${b.resolvedRooms.length} ${b.resolvedRooms.length === 1 ? t.buildings.roomType : t.buildings.roomTypes}`}
-                </p>
+              <div className="p-5">
+                <h3 className="font-heading text-2xl text-text-accent">{b.name}</h3>
+                <p className="mt-1 text-sm text-text-muted">{b.address}</p>
+                {b.comingSoon ? (
+                  <span className="mt-3 inline-block rounded-full bg-[var(--color-surface-secondary)] px-3 py-1 text-xs font-medium text-text-secondary">
+                    {t.buildings.comingSoonShort}
+                  </span>
+                ) : (
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-sm text-text-muted">
+                      {`${b.resolvedRooms.length} ${b.resolvedRooms.length === 1 ? t.buildings.roomType : t.buildings.roomTypes}`}
+                    </span>
+                    <span className="text-sm font-medium text-[var(--color-primary)] transition group-hover:translate-x-0.5">
+                      {t.buildings.viewRooms}
+                    </span>
+                  </div>
+                )}
               </div>
             </Link>
           ))}

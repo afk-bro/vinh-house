@@ -7,15 +7,15 @@ export default function Footer() {
   const wa = whatsappUrl(contacts.whatsapp);
   const tel = telUrl(contacts.phone);
   const mail = mailtoUrl(contacts.email);
-  const link = 'text-sm text-text-secondary hover:text-text-accent';
+  const link = 'text-sm text-[#FFF8ED]/80 transition hover:text-[var(--color-accent-gold)]';
   return (
-    <footer className="mt-20 border-t border-[var(--color-border-subtle)] bg-navbar-forest">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
+    <footer className="mt-20 bg-[var(--color-primary-dark)]">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
         <div className="flex items-start gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
           <div>
-            <p className="font-heading text-2xl text-text-accent">{t.brand.name}</p>
-            <p className="mt-1 max-w-md text-sm text-text-muted">{t.brand.footerTagline}</p>
+            <p className="font-heading text-2xl text-[var(--color-accent-gold)]">{t.brand.name}</p>
+            <p className="mt-1 max-w-md text-sm text-[#FFF8ED]/70">{t.brand.footerTagline}</p>
           </div>
         </div>
         <nav className="flex flex-col gap-2">

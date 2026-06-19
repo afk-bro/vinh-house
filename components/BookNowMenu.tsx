@@ -27,7 +27,7 @@ export default function BookNowMenu({ contacts, message, label = t.nav.bookNow }
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="rounded-lg bg-accent-gold px-5 py-2.5 font-medium text-text-inverse shadow-lg shadow-black/30 transition hover:brightness-105"
+        className="rounded-lg bg-cta px-5 py-2.5 font-medium text-text-inverse shadow-md shadow-cta/30 transition hover:bg-cta-hover"
       >
         {label}
       </button>

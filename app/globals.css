@@ -34,35 +34,41 @@
 
 :root {
   /* Typography */
-  --font-heading: var(--font-heading-loaded, "Cormorant Garamond", serif);
+  --font-heading: var(--font-heading-loaded, "Fraunces", "Cormorant Garamond", serif);
   --font-body: var(--font-body-loaded, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji");
 
-  /* Brand Colors */
-  --color-brand-forest: #06251c;
-  --color-navbar-forest: #042c21;
-  --color-accent-gold: #c8a75a;
-  --color-accent-gold-dark: #d4c08a;
-  --color-accent-gold-muted: #c8b37e;
-  --color-accent-beige: #e9dfc7;
+  /* Brand Colors — coastal summer boutique (2026 redesign) */
+  --color-brand-forest: #FFF8ED;        /* warm ivory / sand — page background */
+  --color-navbar-forest: #FFF8ED;       /* ivory navbar */
+  --color-accent-gold: #F4B860;         /* warm sun gold — price pills, accents */
+  --color-accent-gold-dark: #E9A53C;
+  --color-accent-gold-muted: #EFCB8C;
+  --color-accent-beige: #E8DCC8;        /* warm border / sand */
+
+  /* Coastal palette additions */
+  --color-primary: #0F766E;             /* coastal teal */
+  --color-primary-dark: #064E4A;        /* deep teal — footer */
+  --color-cta: #F97316;                 /* soft orange / coral — primary CTA */
+  --color-cta-hover: #EA670C;
 
   /* Semantic Surface Tokens */
   --color-surface-primary: var(--color-brand-forest);
-  --color-surface-secondary: #083a2c;
-  --color-surface-card: #0a3f30;
-  --color-surface-elevated: #0d4538;
-  --color-surface-overlay: rgba(6, 37, 28, 0.95);
+  --color-surface-secondary: #FFF1D6;   /* soft sand band */
+  --color-surface-card: #FFFFFF;        /* white cards */
+  --color-surface-elevated: #FBF1DD;    /* warm hover tint */
+  --color-surface-overlay: rgba(15, 118, 110, 0.45);
 
   /* Semantic Text Tokens */
-  --color-text-primary: var(--color-accent-beige);
-  --color-text-secondary: #cbbfa5;
-  --color-text-muted: #b8aa8f; /* Lightened for WCAG AA contrast */
-  --color-text-inverse: #06251c;
-  --color-text-accent: var(--color-accent-gold);
+  --color-text-primary: #1F2933;        /* charcoal */
+  --color-text-secondary: #475467;
+  --color-text-muted: #667085;
+  --color-text-inverse: #FFFFFF;        /* text on coral/teal/gold buttons */
+  --color-text-accent: var(--color-primary); /* teal headings & links */
 
   /* Semantic Border/Divider Tokens */
-  --color-border-subtle: rgba(200, 167, 90, 0.15);
-  --color-border-default: rgba(200, 167, 90, 0.25);
-  --color-border-strong: rgba(200, 167, 90, 0.4);
+  --color-border-subtle: rgba(232, 220, 200, 0.6);
+  --color-border-default: #E8DCC8;
+  --color-border-strong: #DCCBAE;
 
   /* Admin Status Colors (harmonized with brand) */
   --color-status-pending: #c8a75a;
@@ -124,6 +130,10 @@
   --color-accent-gold-dark: var(--color-accent-gold-dark);
   --color-accent-gold-muted: var(--color-accent-gold-muted);
   --color-accent-beige: var(--color-accent-beige);
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-cta: var(--color-cta);
+  --color-cta-hover: var(--color-cta-hover);
 
   /* Semantic Tokens */
   --color-surface-primary: var(--color-surface-primary);
@@ -169,10 +179,10 @@ html {
 
 body {
   background: var(--color-brand-forest);
-  color: var(--color-accent-beige);
+  color: var(--color-text-primary);
   font-family: var(--font-body);
-  font-size: 1.0625rem; /* 17px - optimized for readability */
-  line-height: 1.75;
+  font-size: 1rem; /* 16px - tightened for a cleaner, modern feel */
+  line-height: 1.6;
   position: relative;
   z-index: 1; /* Ensures app content sits above background noise */
   -webkit-font-smoothing: antialiased;
@@ -199,8 +209,8 @@ body::before {
 /* Heading Defaults - Consistent brand typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: 0.02em;
-  font-weight: 400; /* Cormorant looks best at normal weight */
+  letter-spacing: -0.01em; /* Fraunces reads best with slightly tight tracking */
+  font-weight: 500;
 }
 
 .font-heading {
