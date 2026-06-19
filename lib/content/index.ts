@@ -1,30 +1,49 @@
 // lib/content/index.ts
-import type { BuildingMeta, RoomMeta } from './types';
-import { listImages, scanDisk, imageUrl, PHOTOS_BASE } from './loader';
+import type { BuildingMeta } from './types';
+import { listImages, imageUrl, PHOTOS_BASE, scanDisk } from './loader';
+import { pick } from './localize';
 import { buildings } from './site';
+import type { Locale } from '@/i18n/routing';
 import path from 'node:path';
 
 export type Img = { src: string; alt: string };
-export type ResolvedRoom = RoomMeta & { buildingSlug: string; buildingName: string; cover: Img; images: Img[] };
-export type ResolvedBuilding = BuildingMeta & { cover: Img | null; images: Img[]; resolvedRooms: ResolvedRoom[] };
+export type ResolvedRoom = {
+  slug: string; name: string; price: string; status: 'available' | 'unavailable';
+  buildingSlug: string; buildingName: string; blurb: string; alt: string; cover: Img; images: Img[];
+};
+export type ResolvedBuilding = {
+  slug: string; folder: string; name: string; address: string; googleMapsUrl: string;
+  blurb: string; alt: string; sortOrder: number; hidden?: boolean; comingSoon?: boolean;
+  cover: Img | null; images: Img[]; resolvedRooms: ResolvedRoom[];
+};
 
-/** Pure resolver: merges metadata with a map of folderPath -> image filenames. */
+/** Pure resolver: metadata + locale + folderPath->filenames map -> resolved building. */
 export function resolveBuilding(
   meta: BuildingMeta,
+  locale: Locale,
   imagesByPath: Record<string, string[]>,
-): ResolvedBuilding & { rooms: ResolvedRoom[] } {
+): ResolvedBuilding {
+  const bAlt = pick(meta.alt, locale);
   const bFiles = imagesByPath[meta.folder] ?? [];
-  const images = bFiles.map((f) => ({ src: imageUrl(meta.folder, f), alt: meta.alt }));
-  const cover = images[0] ?? null;
+  const images = bFiles.map((f) => ({ src: imageUrl(meta.folder, f), alt: bAlt }));
   const resolvedRooms: ResolvedRoom[] = meta.rooms.map((r) => {
+    const rAlt = pick(r.alt, locale);
     const rFiles = imagesByPath[`${meta.folder}/${r.slug}`] ?? [];
-    const rImages = rFiles.map((f) => ({ src: imageUrl(meta.folder, f, r.slug), alt: r.alt }));
-    return { ...r, buildingSlug: meta.slug, buildingName: meta.name, cover: rImages[0] ?? { src: '', alt: r.alt }, images: rImages };
+    const rImages = rFiles.map((f) => ({ src: imageUrl(meta.folder, f, r.slug), alt: rAlt }));
+    return {
+      slug: r.slug, name: pick(r.name, locale), price: r.price, status: r.status,
+      buildingSlug: meta.slug, buildingName: meta.name, blurb: pick(r.blurb, locale), alt: rAlt,
+      cover: rImages[0] ?? { src: '', alt: rAlt }, images: rImages,
+    };
   });
-  return { ...meta, cover, images, resolvedRooms, rooms: resolvedRooms };
+  return {
+    slug: meta.slug, folder: meta.folder, name: meta.name, address: meta.address,
+    googleMapsUrl: meta.googleMapsUrl, blurb: pick(meta.blurb, locale), alt: bAlt,
+    sortOrder: meta.sortOrder, hidden: meta.hidden, comingSoon: meta.comingSoon,
+    cover: images[0] ?? null, images, resolvedRooms,
+  };
 }
 
-/** Build-time: scan disk and produce a folderPath -> filenames map for a building. */
 function imagesMapFor(meta: BuildingMeta): Record<string, string[]> {
   const map: Record<string, string[]> = {};
   map[meta.folder] = listImages(path.join(PHOTOS_BASE, meta.folder));
@@ -34,21 +53,19 @@ function imagesMapFor(meta: BuildingMeta): Record<string, string[]> {
   return map;
 }
 
-/** All visible (non-hidden) buildings, sorted, with resolved images. */
-export function getBuildings(): ResolvedBuilding[] {
+export function getBuildings(locale: Locale): ResolvedBuilding[] {
   return buildings
     .filter((b) => !b.hidden)
     .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map((b) => resolveBuilding(b, imagesMapFor(b)));
+    .map((b) => resolveBuilding(b, locale, imagesMapFor(b)));
 }
 
-export function getBuilding(slug: string): ResolvedBuilding | undefined {
-  return getBuildings().find((b) => b.slug === slug);
+export function getBuilding(slug: string, locale: Locale): ResolvedBuilding | undefined {
+  return getBuildings(locale).find((b) => b.slug === slug);
 }
 
-export function getRoom(buildingSlug: string, roomSlug: string): ResolvedRoom | undefined {
-  return getBuilding(buildingSlug)?.resolvedRooms.find((r) => r.slug === roomSlug);
+export function getRoom(buildingSlug: string, roomSlug: string, locale: Locale): ResolvedRoom | undefined {
+  return getBuilding(buildingSlug, locale)?.resolvedRooms.find((r) => r.slug === roomSlug);
 }
 
-/** Current disk snapshot for validation. */
 export { scanDisk, PHOTOS_BASE };

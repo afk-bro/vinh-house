@@ -5,22 +5,20 @@ import type { BuildingMeta } from './types';
 
 const meta: BuildingMeta = {
   slug: 'gilda-hotel', folder: 'Gilda-Hotel', name: 'Gilda Hotel', address: 'x',
-  googleMapsUrl: 'https://m', blurb: 'b', alt: 'A building', sortOrder: 1,
-  rooms: [{ slug: '1-bedroom', name: '1 Bedroom', price: '$1', blurb: 'b', status: 'available', alt: 'A room' }],
+  googleMapsUrl: 'https://m', blurb: { en: 'B', vi: 'B-vi' }, alt: { en: 'A building' }, sortOrder: 1,
+  rooms: [{ slug: '1-bedroom', name: { en: '1 Bedroom', vi: '1 Phòng ngủ' }, price: '$1', blurb: { en: 'b' }, status: 'available', alt: { en: 'A room' } }],
 };
 
 describe('resolveBuilding', () => {
-  it('maps disk image filenames to public URLs with alt defaults', () => {
-    const r = resolveBuilding(meta, {
+  it('resolves localized fields for the locale (with en fallback) and maps images', () => {
+    const r = resolveBuilding(meta, 'vi', {
       'Gilda-Hotel': ['cover.jpg', 'building-01.jpg'],
       'Gilda-Hotel/1-bedroom': ['cover.jpg', 'room-01.jpg'],
     });
+    expect(r.blurb).toBe('B-vi');                 // vi present
+    expect(r.alt).toBe('A building');             // vi missing -> en
     expect(r.cover).toEqual({ src: '/Phap_photos/Gilda-Hotel/cover.jpg', alt: 'A building' });
-    expect(r.images.map((i) => i.src)).toEqual([
-      '/Phap_photos/Gilda-Hotel/cover.jpg',
-      '/Phap_photos/Gilda-Hotel/building-01.jpg',
-    ]);
-    expect(r.rooms[0].cover.src).toBe('/Phap_photos/Gilda-Hotel/1-bedroom/cover.jpg');
-    expect(r.rooms[0].images[1].alt).toBe('A room');
+    expect(r.resolvedRooms[0].name).toBe('1 Phòng ngủ');
+    expect(r.resolvedRooms[0].images[1].alt).toBe('A room');
   });
 });
