@@ -1,18 +1,25 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { t } from '@/lib/content/strings';
+import { useEffect, useRef, useState, useTransition } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { usePathname, useRouter } from '@/i18n/navigation';
+import { routing, type Locale } from '@/i18n/routing';
 
-const LANGS = [
-  { code: 'en', flag: '🇬🇧', name: 'English', active: true },
-  { code: 'vi', flag: '🇻🇳', name: 'Tiếng Việt', active: false },
-  { code: 'ko', flag: '🇰🇷', name: '한국어', active: false },
-  { code: 'zh', flag: '🇨🇳', name: '中文', active: false },
-  { code: 'ru', flag: '🇷🇺', name: 'Русский', active: false },
-];
+const NAMES: Record<Locale, string> = {
+  en: 'English',
+  vi: 'Tiếng Việt',
+  ko: '한국어',
+  'zh-Hans': '中文',
+  ru: 'Русский',
+};
 
 export default function LanguageMenu() {
+  const t = useTranslations();
+  const active = useLocale() as Locale;
+  const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,31 +30,38 @@ export default function LanguageMenu() {
     return () => document.removeEventListener('mousedown', onDoc);
   }, []);
 
+  function switchTo(locale: Locale) {
+    setOpen(false);
+    startTransition(() => router.replace(pathname, { locale }));
+  }
+
+  const shortLabel: Record<Locale, string> = { en: 'EN', vi: 'VI', ko: 'KO', 'zh-Hans': '中', ru: 'RU' };
+
   return (
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        aria-label={t.nav.selectLanguage}
+        aria-label={t('nav.selectLanguage')}
+        disabled={isPending}
         className="rounded-lg px-3 py-2 text-sm text-text-primary hover:bg-surface-elevated"
       >
-        EN ▾
+        {shortLabel[active]} ▾
       </button>
       {open && (
         <div role="menu" className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
-          {LANGS.map((l) => (
-            <div
-              key={l.code}
+          {routing.locales.map((loc) => (
+            <button
+              key={loc}
               role="menuitem"
-              aria-disabled={!l.active}
-              className={`flex items-center justify-between px-4 py-2.5 text-sm ${
-                l.active ? 'text-text-primary' : 'cursor-not-allowed text-text-muted'
+              onClick={() => switchTo(loc)}
+              className={`block w-full px-4 py-2.5 text-left text-sm hover:bg-surface-elevated ${
+                loc === active ? 'font-semibold text-text-accent' : 'text-text-primary'
               }`}
             >
-              <span><span className="mr-2">{l.flag}</span>{l.name}</span>
-              {!l.active && <span className="text-xs italic">{t.nav.comingSoon}</span>}
-            </div>
+              {NAMES[loc]}
+            </button>
           ))}
         </div>
       )}
