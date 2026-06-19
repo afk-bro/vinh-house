@@ -1,4 +1,4 @@
-import { getTranslations, getLocale, setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Hero from '@/components/Hero';
 import ValueProps from '@/components/ValueProps';
 import BuildingShowcase from '@/components/BuildingShowcase';
