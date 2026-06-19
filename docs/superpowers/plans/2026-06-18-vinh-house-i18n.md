@@ -1556,6 +1556,8 @@ git commit -m "feat: locale-aware sitemap; confirm validate-content unaffected"
 
 ### Task E1: Generate VI/KO/ZH-Hans/RU message catalogs
 
+> **EXECUTION NOTE (resequenced):** This task is pulled **forward into Phase B**. Because the locale layout's `generateStaticParams` (B2) prerenders all 5 locales and `i18n/request.ts` imports `messages/${locale}.json`, all four non-English catalogs must exist for the Phase B build to succeed. Do E1 immediately after B3.
+
 **Files:** Create `messages/vi.json`, `messages/ko.json`, `messages/zh-Hans.json`, `messages/ru.json`
 
 > Same key tree as `en.json`. Brand/proper nouns (`Vĩnh House`, `WhatsApp`, `Facebook`) kept as-is. Da Nang localized in prose (Đà Nẵng / 다낭 / 岘港 / Дананг). **Flagged for native-speaker review.**
