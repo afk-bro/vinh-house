@@ -1,0 +1,57 @@
+{
+  "brand": {
+    "name": "Vĩnh House",
+    "subtitle": "아파트 및 호텔 렌탈 — 다낭",
+    "footerTagline": "다낭의 직접 예약 부티크 아파트 및 호텔. 직접 예약하고, 더 저렴하게, 주인에게 직접 문의하세요."
+  },
+  "nav": {
+    "buildings": "건물",
+    "scooterRental": "스쿠터 대여",
+    "bookNow": "지금 예약",
+    "selectLanguage": "언어 선택",
+    "comingSoon": "준비 중"
+  },
+  "booking": { "whatsapp": "WhatsApp", "phone": "전화", "facebook": "Facebook", "email": "이메일" },
+  "hero": {
+    "headline": "다낭의 편안한 아파트 및 호텔 렌탈",
+    "tagline": "직접 예약하고, 주인에게 문의하고, 번거로움 없이 숙소를 찾으세요.",
+    "viewApartments": "아파트 보기"
+  },
+  "valueProps": {
+    "bookDirect": { "title": "직접 예약하고 더 저렴하게", "body": "플랫폼 수수료나 중개인 없이 — 저희에게 직접 문의하세요." },
+    "message": { "title": "주인에게 직접 문의", "body": "도착 전에 객실, 가격, 이용 가능 여부를 문의하세요." },
+    "local": { "title": "다낭 현지", "body": "현지에서 정착을 도와드릴 준비가 되어 있습니다." }
+  },
+  "scooter": {
+    "title": "다낭 둘러보기",
+    "body": "스쿠터를 빌려 해변, 카페, 도시를 자유롭게 둘러보세요.",
+    "cta": "스쿠터 대여"
+  },
+  "buildings": {
+    "heading": "건물 안내",
+    "comingSoonShort": "세부 정보 준비 중",
+    "roomType": "객실 유형",
+    "roomTypes": "객실 유형",
+    "viewRooms": "객실 보기 →"
+  },
+  "building": {
+    "viewOnMaps": "Google 지도에서 보기 →",
+    "comingSoonTitle": "세부 정보 준비 중",
+    "comingSoonBody": "이 건물의 목록을 준비하고 있습니다."
+  },
+  "room": { "available": "이용 가능", "notAvailable": "이용 불가" },
+  "cta": {
+    "readyToBook": "다낭에서 객실을 찾을 준비가 되셨나요?",
+    "readyToBookBody": "저희에게 직접 문의하시면 가장 좋은 옵션을 선택하도록 도와드리겠습니다."
+  },
+  "inquiry": {
+    "generic": "안녕하세요, Vĩnh House에서 객실을 임대하고 싶습니다.",
+    "building": "안녕하세요, {building}에 관심이 있습니다. 이용 가능한 객실이 있나요?",
+    "room": "안녕하세요, {building}의 {roomType}에 관심이 있습니다. 이용 가능한가요? {url}"
+  },
+  "seo": {
+    "homeTitle": "Vĩnh House — 다낭 아파트 및 호텔 렌탈",
+    "homeDescription": "다낭의 직접 예약 부티크 아파트 및 호텔. 직접 예약하고, 더 저렴하게, 주인에게 직접 문의하세요.",
+    "titleSuffix": "Vĩnh House 다낭"
+  }
+}
