@@ -1,0 +1,57 @@
+{
+  "brand": {
+    "name": "Vĩnh House",
+    "subtitle": "Apartments and Hotel Rentals — Da Nang",
+    "footerTagline": "Direct booked boutique apartments and hotels in Da Nang. Book direct, pay less, message the owner."
+  },
+  "nav": {
+    "buildings": "Buildings",
+    "scooterRental": "Scooter Rental",
+    "bookNow": "Book now",
+    "selectLanguage": "Select language",
+    "comingSoon": "Coming soon"
+  },
+  "booking": { "whatsapp": "WhatsApp", "phone": "Phone", "facebook": "Facebook", "email": "Email" },
+  "hero": {
+    "headline": "Comfortable apartments and hotel rentals in Da Nang",
+    "tagline": "Book direct, message the owner, and find your stay with less hassle.",
+    "viewApartments": "View apartments"
+  },
+  "valueProps": {
+    "bookDirect": { "title": "Book direct, pay less", "body": "No platform fees or middlemen — message us directly." },
+    "message": { "title": "Message the owner", "body": "Ask about rooms, prices, and availability before you arrive." },
+    "local": { "title": "Local in Da Nang", "body": "On the ground and ready to help you settle in." }
+  },
+  "scooter": {
+    "title": "Getting around Da Nang",
+    "body": "Rent a scooter and explore the beach, cafés, and city at your own pace.",
+    "cta": "Scooter rentals"
+  },
+  "buildings": {
+    "heading": "Our buildings",
+    "comingSoonShort": "Details coming soon",
+    "roomType": "room type",
+    "roomTypes": "room types",
+    "viewRooms": "View rooms →"
+  },
+  "building": {
+    "viewOnMaps": "View on Google Maps →",
+    "comingSoonTitle": "Details coming soon",
+    "comingSoonBody": "We're preparing the listings for this building."
+  },
+  "room": { "available": "Available", "notAvailable": "Not available" },
+  "cta": {
+    "readyToBook": "Ready to find your room in Da Nang?",
+    "readyToBookBody": "Message us directly and we'll help you choose the best option."
+  },
+  "inquiry": {
+    "generic": "Hi, I'm interested in renting a room at Vĩnh House.",
+    "building": "Hi, I'm interested in {building}. Is a room available?",
+    "room": "Hi, I'm interested in the {roomType} at {building}. Is it available? {url}"
+  },
+  "seo": {
+    "homeTitle": "Vĩnh House — Apartments and Hotel Rentals in Da Nang",
+    "homeDescription": "Direct booked boutique apartments and hotels in Da Nang. Book direct, pay less, message the owner.",
+    "titleSuffix": "Vĩnh House Da Nang"
+  }
+}
