@@ -38,8 +38,19 @@ describe('i18n integrity', () => {
   it('warns (non-fatal) when a visible locale is missing content', () => {
     const visible = routing.locales.filter((l) => l !== 'en');
     for (const b of buildings) {
-      for (const l of visible) {
-        if (!(l in b.blurb)) console.warn(`content gap: building ${b.slug} blurb missing ${l}`);
+      const fields: { label: string; value: Record<string, unknown> }[] = [
+        { label: `building ${b.slug} blurb`, value: b.blurb },
+        { label: `building ${b.slug} alt`, value: b.alt },
+        ...b.rooms.flatMap((r) => [
+          { label: `room ${b.slug}/${r.slug} name`, value: r.name },
+          { label: `room ${b.slug}/${r.slug} blurb`, value: r.blurb },
+          { label: `room ${b.slug}/${r.slug} alt`, value: r.alt },
+        ]),
+      ];
+      for (const { label, value } of fields) {
+        for (const l of visible) {
+          if (!(l in value)) console.warn(`content gap: ${label} missing ${l}`);
+        }
       }
     }
     expect(true).toBe(true);
