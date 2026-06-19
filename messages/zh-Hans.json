@@ -1,0 +1,57 @@
+{
+  "brand": {
+    "name": "Vĩnh House",
+    "subtitle": "公寓与酒店租赁 — 岘港",
+    "footerTagline": "岘港直订精品公寓与酒店。直接预订，更省钱，直接联系房东。"
+  },
+  "nav": {
+    "buildings": "楼宇",
+    "scooterRental": "租摩托车",
+    "bookNow": "立即预订",
+    "selectLanguage": "选择语言",
+    "comingSoon": "即将推出"
+  },
+  "booking": { "whatsapp": "WhatsApp", "phone": "电话", "facebook": "Facebook", "email": "电子邮件" },
+  "hero": {
+    "headline": "岘港舒适的公寓与酒店租赁",
+    "tagline": "直接预订，联系房东，轻松找到您的住处。",
+    "viewApartments": "查看公寓"
+  },
+  "valueProps": {
+    "bookDirect": { "title": "直接预订，更省钱", "body": "没有平台费用或中介——直接联系我们。" },
+    "message": { "title": "直接联系房东", "body": "在抵达前咨询房间、价格和空房情况。" },
+    "local": { "title": "扎根岘港", "body": "我们就在当地，随时帮助您安顿下来。" }
+  },
+  "scooter": {
+    "title": "畅游岘港",
+    "body": "租一辆摩托车，按自己的节奏探索海滩、咖啡馆和城市。",
+    "cta": "租摩托车"
+  },
+  "buildings": {
+    "heading": "我们的楼宇",
+    "comingSoonShort": "详情即将公布",
+    "roomType": "房型",
+    "roomTypes": "房型",
+    "viewRooms": "查看房间 →"
+  },
+  "building": {
+    "viewOnMaps": "在 Google 地图上查看 →",
+    "comingSoonTitle": "详情即将公布",
+    "comingSoonBody": "我们正在准备该楼宇的房源信息。"
+  },
+  "room": { "available": "可入住", "notAvailable": "暂无空房" },
+  "cta": {
+    "readyToBook": "准备好在岘港找房间了吗？",
+    "readyToBookBody": "直接联系我们，我们将帮您选择最合适的方案。"
+  },
+  "inquiry": {
+    "generic": "您好，我想在 Vĩnh House 租一个房间。",
+    "building": "您好，我对 {building} 感兴趣。还有空房吗？",
+    "room": "您好，我对 {building} 的 {roomType} 感兴趣。还可以入住吗？{url}"
+  },
+  "seo": {
+    "homeTitle": "Vĩnh House — 岘港公寓与酒店租赁",
+    "homeDescription": "岘港直订精品公寓与酒店。直接预订，更省钱，直接联系房东。",
+    "titleSuffix": "Vĩnh House 岘港"
+  }
+}

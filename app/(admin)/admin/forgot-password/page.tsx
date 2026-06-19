@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import Container from "@/components/Container";
 
@@ -51,12 +52,12 @@ export default function ForgotPasswordPage() {
                                 Click the link in the email to reset your password. The link will
                                 expire in 1 hour.
                             </p>
-                            <a
+                            <Link
                                 href="/admin/login"
                                 className="inline-block bg-brand-forest text-accent-beige py-4 md:py-3 px-6 rounded-lg font-medium text-base hover:bg-opacity-90 transition-all touch-manipulation min-h-[48px] flex items-center justify-center"
                             >
                                 Back to Login
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </Container>
@@ -111,12 +112,12 @@ export default function ForgotPasswordPage() {
                         </button>
 
                         <div className="text-center">
-                            <a
+                            <Link
                                 href="/admin/login"
                                 className="inline-block py-2 px-4 text-sm text-[var(--color-text-muted)] hover:text-accent-gold transition-colors underline touch-manipulation"
                             >
                                 Back to Login
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </div>

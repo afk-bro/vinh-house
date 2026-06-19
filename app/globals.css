@@ -218,6 +218,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
+   LANGUAGE FONT FALLBACKS (CJK / Cyrillic coverage)
+   ============================================================================ */
+
+/* Korean & Simplified Chinese: Noto sans for body AND headings (the decorative
+   serif does not render CJK well). */
+:lang(ko) { font-family: var(--font-noto-kr), system-ui, sans-serif; }
+:lang(zh-Hans) { font-family: var(--font-noto-sc), system-ui, sans-serif; }
+:lang(ko) :is(h1, h2, h3, h4, h5, h6),
+:lang(zh-Hans) :is(h1, h2, h3, h4, h5, h6) {
+  font-family: inherit; /* Noto, not Fraunces */
+  letter-spacing: 0;
+}
+
+/* Russian: Fraunces lacks Cyrillic, so headings fall back to a Cyrillic-capable serif. */
+:lang(ru) :is(h1, h2, h3, h4, h5, h6) {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ============================================================================
    ACCESSIBILITY - FOCUS STATES
    ============================================================================ */
 

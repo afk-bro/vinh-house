@@ -1,0 +1,57 @@
+{
+  "brand": {
+    "name": "Vĩnh House",
+    "subtitle": "Cho thuê căn hộ và khách sạn — Đà Nẵng",
+    "footerTagline": "Căn hộ và khách sạn boutique đặt trực tiếp tại Đà Nẵng. Đặt trực tiếp, tiết kiệm hơn, nhắn tin cho chủ nhà."
+  },
+  "nav": {
+    "buildings": "Tòa nhà",
+    "scooterRental": "Thuê xe máy",
+    "bookNow": "Đặt ngay",
+    "selectLanguage": "Chọn ngôn ngữ",
+    "comingSoon": "Sắp ra mắt"
+  },
+  "booking": { "whatsapp": "WhatsApp", "phone": "Điện thoại", "facebook": "Facebook", "email": "Email" },
+  "hero": {
+    "headline": "Căn hộ và khách sạn thoải mái cho thuê tại Đà Nẵng",
+    "tagline": "Đặt trực tiếp, nhắn tin cho chủ nhà và tìm chỗ ở dễ dàng hơn.",
+    "viewApartments": "Xem căn hộ"
+  },
+  "valueProps": {
+    "bookDirect": { "title": "Đặt trực tiếp, tiết kiệm hơn", "body": "Không phí nền tảng hay trung gian — nhắn tin trực tiếp cho chúng tôi." },
+    "message": { "title": "Nhắn tin cho chủ nhà", "body": "Hỏi về phòng, giá và tình trạng trước khi bạn đến." },
+    "local": { "title": "Người địa phương tại Đà Nẵng", "body": "Luôn có mặt và sẵn sàng giúp bạn ổn định chỗ ở." }
+  },
+  "scooter": {
+    "title": "Đi lại quanh Đà Nẵng",
+    "body": "Thuê xe máy và khám phá bãi biển, quán cà phê và thành phố theo nhịp của bạn.",
+    "cta": "Thuê xe máy"
+  },
+  "buildings": {
+    "heading": "Các tòa nhà của chúng tôi",
+    "comingSoonShort": "Thông tin sắp có",
+    "roomType": "loại phòng",
+    "roomTypes": "loại phòng",
+    "viewRooms": "Xem phòng →"
+  },
+  "building": {
+    "viewOnMaps": "Xem trên Google Maps →",
+    "comingSoonTitle": "Thông tin sắp có",
+    "comingSoonBody": "Chúng tôi đang chuẩn bị danh sách cho tòa nhà này."
+  },
+  "room": { "available": "Còn trống", "notAvailable": "Hết phòng" },
+  "cta": {
+    "readyToBook": "Sẵn sàng tìm phòng tại Đà Nẵng?",
+    "readyToBookBody": "Nhắn tin trực tiếp cho chúng tôi và chúng tôi sẽ giúp bạn chọn lựa chọn tốt nhất."
+  },
+  "inquiry": {
+    "generic": "Xin chào, tôi muốn thuê phòng tại Vĩnh House.",
+    "building": "Xin chào, tôi quan tâm đến {building}. Còn phòng trống không?",
+    "room": "Xin chào, tôi quan tâm đến {roomType} tại {building}. Phòng còn trống không? {url}"
+  },
+  "seo": {
+    "homeTitle": "Vĩnh House — Cho thuê căn hộ và khách sạn tại Đà Nẵng",
+    "homeDescription": "Căn hộ và khách sạn boutique đặt trực tiếp tại Đà Nẵng. Đặt trực tiếp, tiết kiệm hơn, nhắn tin cho chủ nhà.",
+    "titleSuffix": "Vĩnh House Đà Nẵng"
+  }
+}

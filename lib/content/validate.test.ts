@@ -7,8 +7,8 @@ import type { DiskBuilding } from './loader';
 function building(over: Partial<BuildingMeta> = {}): BuildingMeta {
   return {
     slug: 'gilda-hotel', folder: 'Gilda-Hotel', name: 'Gilda Hotel', address: 'x',
-    googleMapsUrl: 'https://maps', blurb: 'b', alt: 'a', sortOrder: 1,
-    rooms: [{ slug: '1-bedroom', name: '1 Bedroom', price: '$1', blurb: 'b', status: 'available', alt: 'a' }],
+    googleMapsUrl: 'https://maps', blurb: { en: 'b' }, alt: { en: 'a' }, sortOrder: 1,
+    rooms: [{ slug: '1-bedroom', name: { en: '1 Bedroom' }, price: '$1', blurb: { en: 'b' }, status: 'available', alt: { en: 'a' } }],
     ...over,
   };
 }
@@ -50,7 +50,7 @@ describe('validateContent', () => {
   });
   it('warns on placeholder price', () => {
     const r = validateContent(
-      [building({ rooms: [{ slug: '1-bedroom', name: '1 Bedroom', price: '$— / month', blurb: 'b', status: 'available', alt: 'a' }] })],
+      [building({ rooms: [{ slug: '1-bedroom', name: { en: '1 Bedroom' }, price: '$— / month', blurb: { en: 'b' }, status: 'available', alt: { en: 'a' } }] })],
       okDisk,
     );
     expect(r.warnings.some((w) => w.includes('placeholder'))).toBe(true);

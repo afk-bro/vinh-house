@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { contacts } from '@/lib/content/site';
 import { whatsappUrl, telUrl, mailtoUrl } from '@/lib/contacts';
-import { t } from '@/lib/content/strings';
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getTranslations();
   const wa = whatsappUrl(contacts.whatsapp);
   const tel = telUrl(contacts.phone);
   const mail = mailtoUrl(contacts.email);
@@ -14,15 +15,15 @@ export default function Footer() {
         <div className="flex items-start gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
           <div>
-            <p className="font-heading text-2xl text-[var(--color-accent-gold)]">{t.brand.name}</p>
-            <p className="mt-1 max-w-md text-sm text-[#FFF8ED]/70">{t.brand.footerTagline}</p>
+            <p className="font-heading text-2xl text-[var(--color-accent-gold)]">{t('brand.name')}</p>
+            <p className="mt-1 max-w-md text-sm text-[#FFF8ED]/70">{t('brand.footerTagline')}</p>
           </div>
         </div>
         <nav className="flex flex-col gap-2">
           {mail && <a className={link} href={mail}>{contacts.email}</a>}
           {tel && <a className={link} href={tel}>{contacts.phone}</a>}
-          {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer">{t.booking.whatsapp}</a>}
-          {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer">{t.booking.facebook}</a>}
+          {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer">{t('booking.whatsapp')}</a>}
+          {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer">{t('booking.facebook')}</a>}
         </nav>
       </div>
     </footer>

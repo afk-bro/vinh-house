@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
@@ -119,12 +120,12 @@ export default function AdminLoginPage() {
                         </button>
 
                         <div className="text-center">
-                            <a
+                            <Link
                                 href="/admin/forgot-password"
                                 className="inline-block py-2 px-4 text-sm text-[var(--color-text-muted)] hover:text-accent-gold transition-colors underline touch-manipulation"
                             >
                                 Forgot Password?
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </div>
