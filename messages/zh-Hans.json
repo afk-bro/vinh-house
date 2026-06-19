@@ -39,7 +39,7 @@
     "comingSoonTitle": "详情即将公布",
     "comingSoonBody": "我们正在准备该楼宇的房源信息。"
   },
-  "room": { "available": "可入住", "notAvailable": "暂无空房" },
+  "room": { "available": "可入住", "notAvailable": "暂无空房", "perNight": "每晚" },
   "cta": {
     "readyToBook": "准备好在岘港找房间了吗？",
     "readyToBookBody": "直接联系我们，我们将帮您选择最合适的方案。"

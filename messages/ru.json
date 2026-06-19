@@ -39,7 +39,7 @@
     "comingSoonTitle": "Подробности скоро",
     "comingSoonBody": "Мы готовим объявления для этого здания."
   },
-  "room": { "available": "Свободно", "notAvailable": "Нет мест" },
+  "room": { "available": "Свободно", "notAvailable": "Нет мест", "perNight": "за ночь" },
   "cta": {
     "readyToBook": "Готовы найти номер в Дананге?",
     "readyToBookBody": "Напишите нам напрямую, и мы поможем выбрать лучший вариант."
