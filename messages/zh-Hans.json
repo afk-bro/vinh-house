@@ -13,7 +13,7 @@
     "menu": "菜单"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "电话", "facebook": "Facebook", "email": "电子邮件", "zalo": "Zalo", "call": "致电" },
-  "contact": { "eyebrow": "联系我们", "heading": "准备好在岘港预订您的住宿了吗？", "subtitle": "直接给我们发消息或致电——我们回复很快。" },
+  "contact": { "eyebrow": "联系我们", "heading": "准备好查询空房了吗？", "subtitle": "直接联系我们了解房间、价格和长租（按月）。" },
   "hero": {
     "headline": "岘港舒适的公寓与酒店租赁",
     "tagline": "直接预订，联系房东，轻松找到您的住处。",
@@ -31,6 +31,7 @@
   },
   "buildings": {
     "heading": "我们的楼宇",
+    "intro": "遍布岘港的精品公寓和酒店客房——选择一栋楼即可查看房间、价格和空房情况。",
     "comingSoonShort": "详情即将公布",
     "roomType": "房型",
     "roomTypes": "房型",

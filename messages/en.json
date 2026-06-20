@@ -13,11 +13,7 @@
     "menu": "Menu"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "Phone", "facebook": "Facebook", "email": "Email", "zalo": "Zalo", "call": "Call" },
-  "contact": {
-    "eyebrow": "Get in touch",
-    "heading": "Ready to book your stay in Da Nang?",
-    "subtitle": "Message or call us directly — we reply fast."
-  },
+  "contact": { "eyebrow": "Get in touch", "heading": "Ready to check availability?", "subtitle": "Message us directly for rooms, prices, and monthly stays." },
   "hero": {
     "headline": "Comfortable apartments and hotel rentals in Da Nang",
     "tagline": "Book direct, message the owner, and find your stay with less hassle.",
@@ -33,13 +29,7 @@
     "body": "Rent a scooter and explore the beach, cafés, and city at your own pace.",
     "cta": "Scooter rentals"
   },
-  "buildings": {
-    "heading": "Our buildings",
-    "comingSoonShort": "Details coming soon",
-    "roomType": "room type",
-    "roomTypes": "room types",
-    "viewRooms": "View rooms →"
-  },
+  "buildings": { "heading": "Our buildings", "intro": "Boutique apartments and hotel rooms across Da Nang — browse a building to see rooms, prices, and availability.", "comingSoonShort": "Details coming soon", "roomType": "room type", "roomTypes": "room types", "viewRooms": "View rooms →" },
   "building": {
     "viewOnMaps": "View on Google Maps →",
     "comingSoonTitle": "Details coming soon",
