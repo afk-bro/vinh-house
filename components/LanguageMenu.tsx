@@ -50,10 +50,12 @@ export default function LanguageMenu() {
 
   const ActiveFlag = FLAGS[active];
   const flagClass = 'h-4 w-6 shrink-0 rounded-[2px] shadow-sm ring-1 ring-black/10';
+  const SHORT: Record<Locale, string> = { en: 'EN', vi: 'VI', ko: 'KO', 'zh-Hans': '中', ru: 'RU' };
 
   return (
     <div className="relative" ref={ref}>
       <button
+        type="button"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
@@ -62,6 +64,7 @@ export default function LanguageMenu() {
         className="flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-text-primary hover:bg-surface-elevated"
       >
         <ActiveFlag className={flagClass} title={NAMES[active]} />
+        <span>{SHORT[active]}</span>
         <span aria-hidden>▾</span>
       </button>
       {open && (
@@ -71,6 +74,7 @@ export default function LanguageMenu() {
             return (
               <button
                 key={loc}
+                type="button"
                 role="menuitem"
                 onClick={() => switchTo(loc)}
                 className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm hover:bg-surface-elevated ${
