@@ -11,36 +11,37 @@ export default async function BuildingShowcase() {
   const locale = (await getLocale()) as Locale;
   const buildings = getBuildings(locale);
   return (
-    <section id="buildings" className="py-16">
+    <section id="buildings" className="scroll-mt-24 py-16">
       <Container>
         <Reveal>
           <h2 className="font-heading text-4xl text-text-accent">{t('heading')}</h2>
+          <p className="mt-3 max-w-2xl text-text-secondary">{t('intro')}</p>
         </Reveal>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-8 grid max-w-5xl gap-6 sm:grid-cols-2">
           {buildings.map((b, i) => (
             <Reveal key={b.slug} delay={i * 70}>
               <Link href={`/buildings/${b.slug}`}
-                className="group block h-full overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                className="group block h-full overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2">
                 {b.cover && (
-                  <div className="h-48 w-full overflow-hidden">
+                  <div className="h-56 w-full overflow-hidden">
                     <Image src={b.cover.src} alt={b.cover.alt} width={480} height={300}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="h-48 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
                   </div>
                 )}
                 <div className="p-5">
                   <h3 className="font-heading text-2xl text-text-accent">{b.name}</h3>
-                  <p className="mt-1 text-sm text-text-muted">{b.address}</p>
+                  <p className="mt-1 text-base text-text-muted">{b.address}</p>
                   {b.comingSoon ? (
                     <span className="mt-3 inline-block rounded-full bg-[var(--color-surface-secondary)] px-3 py-1 text-xs font-medium text-text-secondary">
                       {t('comingSoonShort')}
                     </span>
                   ) : (
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-sm text-text-muted">
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-base text-text-muted">
                         {`${b.resolvedRooms.length} ${b.resolvedRooms.length === 1 ? t('roomType') : t('roomTypes')}`}
                       </span>
-                      <span className="text-sm font-medium text-[var(--color-primary)] transition-transform duration-300 group-hover:translate-x-1">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-[var(--color-primary)]/40 px-3 py-1 text-sm font-medium text-[var(--color-primary)] transition group-hover:bg-[var(--color-primary)] group-hover:text-white">
                         {t('viewRooms')}
                       </span>
                     </div>
