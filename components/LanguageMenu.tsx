@@ -50,7 +50,7 @@ export default function LanguageMenu() {
 
   const ActiveFlag = FLAGS[active];
   const flagClass = 'h-4 w-6 shrink-0 rounded-[2px] shadow-sm ring-1 ring-black/10';
-  const SHORT: Record<Locale, string> = { en: 'EN', vi: 'VI', ko: 'KO', 'zh-Hans': '中', ru: 'RU' };
+  const SHORT: Record<Locale, string> = { en: 'EN', vi: 'VI', ko: 'KO', 'zh-Hans': 'ZH', ru: 'RU' };
 
   return (
     <div className="relative" ref={ref}>
@@ -77,12 +77,13 @@ export default function LanguageMenu() {
                 type="button"
                 role="menuitem"
                 onClick={() => switchTo(loc)}
+                aria-label={NAMES[loc]}
                 className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm hover:bg-surface-elevated ${
                   loc === active ? 'font-semibold text-text-accent' : 'text-text-primary'
                 }`}
               >
                 <Flag className={flagClass} title={NAMES[loc]} />
-                {NAMES[loc]}
+                {SHORT[loc]}
               </button>
             );
           })}
