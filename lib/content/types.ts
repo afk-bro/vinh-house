@@ -18,16 +18,22 @@ export type RoomMeta = {
   alt: Localized<string>;
 };
 
+export type Landmark = { name: Localized<string>; distance: string };
+
 export type BuildingMeta = {
   slug: string;
   folder: string;
-  name: string;              // brand proper noun — single-source
-  address: string;           // single-source
+  name: string;
+  address: string;
   googleMapsUrl: string;
+  googleMapsEmbedUrl?: string;
+  directionsUrl?: string;
   blurb: Localized<string>;
   alt: Localized<string>;
   sortOrder: number;
   hidden?: boolean;
   comingSoon?: boolean;
+  amenityIds?: string[];
+  landmarks?: Landmark[];
   rooms: RoomMeta[];
 };
