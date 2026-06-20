@@ -16,7 +16,7 @@ export default async function Navbar() {
         <Link href="/" className="flex min-w-0 items-center gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="h-10 w-10 rounded sm:h-11 sm:w-11" />
           <span className="leading-tight">
-            <span className="block font-heading text-xl text-text-accent sm:text-2xl">{t('brand.name')}</span>
+            <span className="block whitespace-nowrap font-heading text-xl text-text-accent sm:text-2xl">{t('brand.name')}</span>
             <span className="hidden text-[11px] text-text-muted md:block">{t('brand.subtitle')}</span>
           </span>
         </Link>
