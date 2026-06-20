@@ -53,5 +53,15 @@
     "homeTitle": "Vĩnh House — 岘港公寓与酒店租赁",
     "homeDescription": "岘港直订精品公寓与酒店。直接预订，更省钱，直接联系房东。",
     "titleSuffix": "Vĩnh House 岘港"
+  },
+  "roomInfo": {
+    "amenitiesHeading": "设施",
+    "locationHeading": "位置",
+    "openInMaps": "在 Google 地图中打开",
+    "directions": "获取路线",
+    "askWhatsApp": "通过 WhatsApp 咨询我们",
+    "aroundHeading": "公寓周边",
+    "approx": "约",
+    "faqHeading": "常见问题"
   }
 }

@@ -4,6 +4,8 @@ import { buildings } from './site';
 import { scanDisk, PHOTOS_BASE } from './loader';
 import { validateContent } from './validate';
 import { slugify } from './slug';
+import { AMENITIES } from './amenities';
+import { FAQ } from './faq';
 
 describe('content integrity (real folders + site.ts)', () => {
   it('every building slug equals slugify(folder)', () => {
@@ -14,5 +16,23 @@ describe('content integrity (real folders + site.ts)', () => {
     if (result.errors.length) console.error('Content errors:\n' + result.errors.join('\n'));
     if (result.warnings.length) console.warn('Content warnings:\n' + result.warnings.join('\n'));
     expect(result.errors).toEqual([]);
+  });
+  it('every amenity label, landmark name, and FAQ q/a has an English source', () => {
+    for (const a of AMENITIES) expect(a.label.en, `amenity ${a.id}`).toBeTruthy();
+    for (const f of FAQ) {
+      expect(f.q.en, `faq ${f.id} q`).toBeTruthy();
+      expect(f.a.en, `faq ${f.id} a`).toBeTruthy();
+    }
+    for (const b of buildings) {
+      for (const l of b.landmarks ?? []) expect(l.name.en, `${b.slug} landmark`).toBeTruthy();
+    }
+  });
+  it('every building amenityId references a known amenity in the catalog', () => {
+    const known = new Set(AMENITIES.map((a) => a.id));
+    for (const b of buildings) {
+      for (const id of b.amenityIds ?? []) {
+        expect(known.has(id), `${b.slug} references unknown amenity id "${id}"`).toBe(true);
+      }
+    }
   });
 });

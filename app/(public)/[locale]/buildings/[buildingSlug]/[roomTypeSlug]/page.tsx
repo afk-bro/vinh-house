@@ -6,7 +6,11 @@ import { Link } from '@/i18n/navigation';
 import Container from '@/components/Container';
 import RoomGallery from '@/components/RoomGallery';
 import BookNowMenu from '@/components/BookNowMenu';
-import { getBuildings, getBuilding, getRoom } from '@/lib/content';
+import Amenities from '@/components/room/Amenities';
+import LocationSection from '@/components/room/LocationSection';
+import AroundSection from '@/components/room/AroundSection';
+import Faq from '@/components/room/Faq';
+import { getBuildings, getBuilding, getRoom, getFaq } from '@/lib/content';
 import { contacts } from '@/lib/content/site';
 import type { Locale } from '@/i18n/routing';
 
@@ -46,6 +50,7 @@ export default async function RoomPage(
   const localePrefix = locale === 'en' ? '' : locale === 'zh-Hans' ? '/zh' : `/${locale}`;
   const url = host ? `${proto}://${host}${localePrefix}/buildings/${buildingSlug}/${roomTypeSlug}` : '';
   const message = t('inquiry.room', { roomType: room.name, building: building.name, url });
+  const faq = getFaq(locale as Locale);
 
   const available = room.status === 'available';
   return (
@@ -63,6 +68,18 @@ export default async function RoomPage(
       <p className="mt-4 max-w-2xl text-text-secondary">{room.blurb}</p>
       <div className="mt-6"><RoomGallery images={room.images} /></div>
       <div className="mt-8"><BookNowMenu contacts={contacts} message={message} /></div>
+
+      <Amenities amenities={building.amenities} />
+      <LocationSection
+        address={building.address}
+        mapsUrl={building.mapsUrl}
+        embedUrl={building.embedUrl}
+        directionsUrl={building.directionsUrl}
+        whatsapp={contacts.whatsapp}
+        message={message}
+      />
+      <AroundSection landmarks={building.landmarks} />
+      <Faq items={faq} />
     </Container>
   );
 }

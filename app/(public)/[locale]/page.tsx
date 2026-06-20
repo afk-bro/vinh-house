@@ -8,6 +8,7 @@ import BookNowMenu from '@/components/BookNowMenu';
 import Reveal from '@/components/Reveal';
 import { contacts } from '@/lib/content/site';
 import { whatsappUrl } from '@/lib/contacts';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -29,7 +30,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <p className="max-w-xl text-text-secondary">{t('cta.readyToBookBody')}</p>
               <div className="flex items-center gap-4">
                 <BookNowMenu contacts={contacts} message={generic} />
-                {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[var(--color-primary)] underline-offset-4 hover:underline">{t('booking.whatsapp')}</a>}
+                {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] underline-offset-4 hover:underline"><WhatsAppIcon className="h-4 w-4 text-[#25D366]" />{t('booking.whatsapp')}</a>}
               </div>
             </div>
           </Reveal>

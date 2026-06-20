@@ -53,5 +53,15 @@
     "homeTitle": "Vĩnh House — аренда апартаментов и отелей в Дананге",
     "homeDescription": "Бутик-апартаменты и отели в Дананге с прямым бронированием. Бронируйте напрямую, платите меньше, пишите владельцу.",
     "titleSuffix": "Vĩnh House Дананг"
+  },
+  "roomInfo": {
+    "amenitiesHeading": "Удобства",
+    "locationHeading": "Расположение",
+    "openInMaps": "Открыть в Google Картах",
+    "directions": "Построить маршрут",
+    "askWhatsApp": "Напишите нам в WhatsApp",
+    "aroundHeading": "Рядом с апартаментами",
+    "approx": "Прибл.",
+    "faqHeading": "Частые вопросы"
   }
 }
