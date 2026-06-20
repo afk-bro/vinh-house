@@ -81,6 +81,7 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
             href={motorbikeUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
             className="block border-t border-[var(--color-border-subtle)] px-4 py-3 text-sm text-text-primary hover:bg-surface-elevated"
           >
             {t('nav.scooterRental')}
@@ -97,7 +98,7 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
                     onClick={() => switchTo(loc)}
                     disabled={isPending}
                     aria-label={NAMES[loc]}
-                    className={`flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm ${
+                    className={`flex min-h-[44px] items-center gap-1.5 rounded-lg border px-3 py-2 text-sm ${
                       loc === active
                         ? 'border-[var(--color-border-strong)] font-semibold text-text-accent'
                         : 'border-[var(--color-border-default)] text-text-primary'

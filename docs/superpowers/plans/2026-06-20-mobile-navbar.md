@@ -158,20 +158,19 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
         aria-expanded={open}
+        aria-controls="mobile-nav-panel"
         aria-label={t('nav.menu')}
         className="flex h-11 w-11 items-center justify-center rounded-lg text-text-primary hover:bg-surface-elevated"
       >
         {open ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
       </button>
       {open && (
-        <div role="menu" style={{ transformOrigin: 'top right' }} className="menu-in absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
+        <nav id="mobile-nav-panel" aria-label={t('nav.menu')} style={{ transformOrigin: 'top right' }} className="menu-in absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
           <p className="px-4 pb-1 pt-3 text-xs font-semibold uppercase tracking-wide text-text-muted">{t('nav.buildings')}</p>
           {items.map((b) => (
             <Link
               key={b.slug}
-              role="menuitem"
               href={`/buildings/${b.slug}`}
               onClick={() => setOpen(false)}
               className="flex items-center justify-between px-4 py-3 text-sm text-text-primary hover:bg-surface-elevated"
@@ -181,10 +180,10 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
             </Link>
           ))}
           <a
-            role="menuitem"
             href={motorbikeUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
             className="block border-t border-[var(--color-border-subtle)] px-4 py-3 text-sm text-text-primary hover:bg-surface-elevated"
           >
             {t('nav.scooterRental')}
@@ -201,7 +200,7 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
                     onClick={() => switchTo(loc)}
                     disabled={isPending}
                     aria-label={NAMES[loc]}
-                    className={`flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm ${
+                    className={`flex min-h-[44px] items-center gap-1.5 rounded-lg border px-3 py-2 text-sm ${
                       loc === active
                         ? 'border-[var(--color-border-strong)] font-semibold text-text-accent'
                         : 'border-[var(--color-border-default)] text-text-primary'
@@ -214,7 +213,7 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
               })}
             </div>
           </div>
-        </div>
+        </nav>
       )}
     </div>
   );
