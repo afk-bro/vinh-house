@@ -30,7 +30,7 @@ export default function BuildingsMenu({ items }: { items: Item[] }) {
         {t('nav.buildings')} ▾
       </button>
       {open && (
-        <div role="menu" className="absolute left-0 z-50 mt-2 w-56 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
+        <div role="menu" className="menu-in absolute left-0 z-50 mt-2 w-56 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
           {items.map((b) => (
             <Link key={b.slug} role="menuitem" href={`/buildings/${b.slug}`}
               className="flex items-center justify-between px-4 py-2.5 text-sm text-text-primary hover:bg-surface-elevated"

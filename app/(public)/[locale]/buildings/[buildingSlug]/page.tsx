@@ -63,11 +63,15 @@ export default async function BuildingPage(
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {b.resolvedRooms.map((r) => (
               <Link key={r.slug} href={`/buildings/${b.slug}/${r.slug}`}
-                className="relative block overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                {r.cover.src && <Image src={r.cover.src} alt={r.cover.alt} width={480} height={320}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="h-52 w-full object-cover" />}
-                <span className="absolute left-3 top-3 rounded-full bg-accent-gold px-3 py-1 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm">{r.price} · {t('room.perNight')}</span>
+                className="group relative block overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                {r.cover.src && (
+                  <div className="h-52 w-full overflow-hidden">
+                    <Image src={r.cover.src} alt={r.cover.alt} width={480} height={320}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="h-52 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
+                  </div>
+                )}
+                <span className="price-pill absolute left-3 top-3 rounded-full px-3 py-1 text-sm font-semibold text-[var(--color-text-primary)]">{r.price} · {t('room.perNight')}</span>
                 <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium shadow-sm"
                   style={{ color: r.status === 'available' ? 'var(--color-status-confirmed)' : 'var(--color-status-cancelled)' }}>
                   {r.status === 'available' ? t('room.available') : t('room.notAvailable')}

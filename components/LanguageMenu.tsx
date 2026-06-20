@@ -68,7 +68,7 @@ export default function LanguageMenu() {
         <span aria-hidden>▾</span>
       </button>
       {open && (
-        <div role="menu" className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
+        <div role="menu" className="menu-in absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
           {routing.locales.map((loc) => {
             const Flag = FLAGS[loc];
             return (

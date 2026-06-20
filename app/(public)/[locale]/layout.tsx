@@ -43,6 +43,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={fontVars}>
       <body className="bg-brand-forest text-text-primary">
+        {/* Enables scroll-reveal hiding only when JS is available (no-JS stays fully visible). */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <NextIntlClientProvider>
           <Navbar />
           <main>{children}</main>
