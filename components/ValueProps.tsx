@@ -21,7 +21,7 @@ export default async function ValueProps() {
                 <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
               </span>
               <h3 className="mt-4 font-heading text-2xl text-text-accent">{t(`${key}.title`)}</h3>
-              <p className="mt-2 text-text-secondary">{t(`${key}.body`)}</p>
+              <p className="mt-2 text-text-primary">{t(`${key}.body`)}</p>
             </Reveal>
           ))}
         </div>
