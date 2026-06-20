@@ -987,6 +987,10 @@ input[type="checkbox"]:disabled {
   .cta-pill:hover {
     transform: translateY(-2px);
   }
+  .cta-pill:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
   @media (prefers-reduced-motion: reduce) {
     .cta-pill:hover { transform: none; }
   }
