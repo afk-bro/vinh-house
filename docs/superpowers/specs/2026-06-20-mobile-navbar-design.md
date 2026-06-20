@@ -15,14 +15,14 @@ Make the navigation render and perform correctly on mobile via a breakpoint-awar
 | Mobile nav pattern | **Hamburger** below `md` (768px); inline nav at `md+` (unchanged) |
 | Always visible on mobile | Logo/wordmark + **Book now** CTA + ☰ hamburger |
 | In the hamburger panel | Flat **building links**, **Scooter Rental**, compact **language options** |
-| Subtitle on mobile | Hidden (`hidden sm:block`) |
+| Subtitle on mobile | Hidden (`hidden md:block`) |
 | Language labels | **Flag + 2-letter code** (EN · VI · KO · ZH · RU); full native names used for **aria-labels only** |
 | QA bar | No horizontal scroll at common widths; ~44px tap targets; no layout shift/regression |
 
 ## Architecture
 
 ### `components/Navbar.tsx` (server) — breakpoint split
-- Left: logo image + "Vĩnh House" wordmark (always); subtitle becomes `hidden sm:block`.
+- Left: logo image + "Vĩnh House" wordmark (always); subtitle becomes `hidden md:block`.
 - Right cluster (`ml-auto`):
   - **Desktop group** (`hidden md:flex`): `BuildingsMenu`, Scooter Rental link, `LanguageMenu`.
   - **`BookNowMenu`** — rendered once, **always visible** (mobile + desktop).
@@ -30,8 +30,8 @@ Make the navigation render and perform correctly on mobile via a breakpoint-awar
 - Passes `buildingNav()` items and `contacts.motorbikeUrl` to `MobileNav`.
 
 ### `components/MobileNav.tsx` (client, new)
-- A ☰ button: `aria-label={t('nav.menu')}` (a **new** `nav.menu` message key added to all 5 catalogs — "Menu" / "Trình đơn" / "메뉴" / "菜单" / "Меню"), `aria-haspopup="menu"`, `aria-expanded`, min 44×44px tap target.
-- Opens a panel (absolute, full-width or right-aligned card) containing, in order:
+- A ☰ button: `aria-label={t('nav.menu')}` (a **new** `nav.menu` message key added to all 5 catalogs — "Menu" / "Trình đơn" / "메뉴" / "菜单" / "Меню"), `aria-expanded`, and `aria-controls` pointing at the panel id, min 44×44px tap target. This is a **disclosure** pattern (not a `role="menu"`), since the panel mixes a heading, navigation links, and language buttons.
+- Opens a panel — a `<nav aria-label>` landmark (absolute, right-aligned card) with native links/buttons — containing, in order:
   1. **Buildings** — a small heading (`nav.buildings`) + flat list of next-intl `Link`s to each building (`{slug, name}`), coming-soon ones tagged with `nav.comingSoon`.
   2. **Scooter Rental** — external link to `motorbikeUrl` (`nav.scooterRental`), new tab.
   3. **Language** — a row of flag + 2-letter code buttons; each `aria-label` = full native name; selecting switches locale via `@/i18n/navigation` `useRouter().replace(pathname, { locale })`.
@@ -47,8 +47,8 @@ Make the navigation render and perform correctly on mobile via a breakpoint-awar
 ## Accessibility
 
 - Full native language names (`English`, `Tiếng Việt`, `한국어`, `中文`, `Русский`) appear in `aria-label`s so screen-reader users hear the language, while sighted users see compact codes.
-- Hamburger button: proper `aria-expanded`/`aria-haspopup`, ≥44×44px.
-- Menu/language option buttons: ≥44px tall tap targets on mobile; `type="button"`.
+- Hamburger button: `aria-expanded` + `aria-controls` (disclosure), ≥44×44px. The panel is a `<nav aria-label>` landmark with native links/buttons (not an ARIA `menu`), so no `role="menu"`/`menuitem` is needed.
+- Language option buttons: ≥44px tall tap targets on mobile; `type="button"`.
 
 ## Performance / overflow (verification, mostly already in place)
 
