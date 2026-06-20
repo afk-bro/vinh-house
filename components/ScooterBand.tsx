@@ -15,7 +15,7 @@ export default async function ScooterBand() {
               <p className="mt-1 text-text-secondary">{t('body')}</p>
             </div>
             <a href={contacts.motorbikeUrl} target="_blank" rel="noopener noreferrer"
-              className="shrink-0 rounded-lg bg-cta px-5 py-2.5 font-medium text-text-inverse shadow-md shadow-cta/30 transition hover:-translate-y-0.5 hover:bg-cta-hover hover:shadow-lg">
+              className="cta-pill shrink-0 bg-cta text-text-inverse shadow-md shadow-cta/30 hover:bg-cta-hover hover:shadow-lg">
               {t('cta')}
             </a>
           </div>
