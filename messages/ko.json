@@ -9,7 +9,8 @@
     "scooterRental": "스쿠터 대여",
     "bookNow": "지금 예약",
     "selectLanguage": "언어 선택",
-    "comingSoon": "준비 중"
+    "comingSoon": "준비 중",
+    "menu": "메뉴"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "전화", "facebook": "Facebook", "email": "이메일" },
   "hero": {

@@ -9,7 +9,8 @@
     "scooterRental": "Аренда скутера",
     "bookNow": "Забронировать",
     "selectLanguage": "Выбрать язык",
-    "comingSoon": "Скоро"
+    "comingSoon": "Скоро",
+    "menu": "Меню"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "Телефон", "facebook": "Facebook", "email": "Эл. почта" },
   "hero": {

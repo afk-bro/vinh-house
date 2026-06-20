@@ -9,7 +9,8 @@
     "scooterRental": "租摩托车",
     "bookNow": "立即预订",
     "selectLanguage": "选择语言",
-    "comingSoon": "即将推出"
+    "comingSoon": "即将推出",
+    "menu": "菜单"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "电话", "facebook": "Facebook", "email": "电子邮件" },
   "hero": {
