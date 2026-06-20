@@ -4,6 +4,8 @@ import { listImages, imageUrl, PHOTOS_BASE, scanDisk } from './loader';
 import { pick } from './localize';
 import { buildings } from './site';
 import type { Locale } from '@/i18n/routing';
+import { resolveAmenities, type ResolvedAmenity } from './amenities';
+import { mapsUrl, embedUrl, directionsUrl } from './maps';
 import path from 'node:path';
 
 export type Img = { src: string; alt: string };
@@ -11,10 +13,13 @@ export type ResolvedRoom = {
   slug: string; name: string; price: string; status: 'available' | 'unavailable';
   buildingSlug: string; buildingName: string; blurb: string; alt: string; cover: Img; images: Img[];
 };
+export type ResolvedLandmark = { name: string; distance: string };
 export type ResolvedBuilding = {
   slug: string; folder: string; name: string; address: string; googleMapsUrl: string;
   blurb: string; alt: string; sortOrder: number; hidden?: boolean; comingSoon?: boolean;
   cover: Img | null; images: Img[]; resolvedRooms: ResolvedRoom[];
+  amenities: ResolvedAmenity[]; landmarks: ResolvedLandmark[];
+  mapsUrl: string; embedUrl: string; directionsUrl: string;
 };
 
 /** Pure resolver: metadata + locale + folderPath->filenames map -> resolved building. */
@@ -41,6 +46,9 @@ export function resolveBuilding(
     googleMapsUrl: meta.googleMapsUrl, blurb: pick(meta.blurb, locale), alt: bAlt,
     sortOrder: meta.sortOrder, hidden: meta.hidden, comingSoon: meta.comingSoon,
     cover: images[0] ?? null, images, resolvedRooms,
+    amenities: resolveAmenities(meta.amenityIds ?? [], locale),
+    landmarks: (meta.landmarks ?? []).map((l) => ({ name: pick(l.name, locale), distance: l.distance })),
+    mapsUrl: mapsUrl(meta), embedUrl: embedUrl(meta), directionsUrl: directionsUrl(meta),
   };
 }
 
@@ -69,3 +77,5 @@ export function getRoom(buildingSlug: string, roomSlug: string, locale: Locale):
 }
 
 export { scanDisk, PHOTOS_BASE };
+export { getFaq } from './faq';
+export type { ResolvedFaq } from './faq';
