@@ -3,13 +3,12 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import BuildingsMenu from './BuildingsMenu';
 import LanguageMenu from './LanguageMenu';
-import BookNowMenu from './BookNowMenu';
+import BookNowButton from './BookNowButton';
 import MobileNav from './MobileNav';
 import { contacts, buildingNav } from '@/lib/content/site';
 
 export default async function Navbar() {
   const t = await getTranslations();
-  const generic = t('inquiry.generic');
   const items = buildingNav();
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-border-default)] bg-navbar-forest/95 shadow-sm backdrop-blur">
@@ -30,7 +29,7 @@ export default async function Navbar() {
             </a>
             <LanguageMenu />
           </div>
-          <BookNowMenu contacts={contacts} message={generic} />
+          <BookNowButton compact />
           <MobileNav items={items} motorbikeUrl={contacts.motorbikeUrl} />
         </div>
       </nav>

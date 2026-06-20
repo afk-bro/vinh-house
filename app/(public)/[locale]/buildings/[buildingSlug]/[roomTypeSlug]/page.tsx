@@ -5,7 +5,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import Container from '@/components/Container';
 import RoomGallery from '@/components/RoomGallery';
-import BookNowMenu from '@/components/BookNowMenu';
+import BookNowButton from '@/components/BookNowButton';
 import Amenities from '@/components/room/Amenities';
 import LocationSection from '@/components/room/LocationSection';
 import AroundSection from '@/components/room/AroundSection';
@@ -67,7 +67,7 @@ export default async function RoomPage(
       </div>
       <p className="mt-4 max-w-2xl text-text-secondary">{room.blurb}</p>
       <div className="mt-6"><RoomGallery images={room.images} /></div>
-      <div className="mt-8"><BookNowMenu contacts={contacts} message={message} /></div>
+      <div className="mt-8"><BookNowButton /></div>
 
       <Amenities amenities={building.amenities} />
       <LocationSection
