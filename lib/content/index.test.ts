@@ -23,19 +23,17 @@ describe('resolveBuilding', () => {
   });
 });
 
-import { resolveBuilding as rb } from './index';
-
 describe('resolveBuilding info sections', () => {
   it('resolves amenities, landmarks, and map URLs for the locale', () => {
-    const meta = {
+    const infoMeta: BuildingMeta = {
       slug: 'gilda-hotel', folder: 'Gilda-Hotel', name: 'Gilda Hotel', address: 'A',
       googleMapsUrl: 'https://maps/explicit', blurb: { en: 'b' }, alt: { en: 'a' }, sortOrder: 1,
-      amenityIds: ['wifi'], landmarks: [{ name: { en: 'Beach', vi: 'Bãi biển' }, distance: '0.4 km' }],
+      amenityIds: ['wifi'], landmarks: [{ id: 'beach', name: { en: 'Beach', vi: 'Bãi biển' }, distance: '0.4 km' }],
       rooms: [],
     };
-    const r = rb(meta as never, 'vi', {});
+    const r = resolveBuilding(infoMeta, 'vi', {});
     expect(r.amenities[0].icon).toBe('📶');
-    expect(r.landmarks[0]).toEqual({ name: 'Bãi biển', distance: '0.4 km' });
+    expect(r.landmarks[0]).toEqual({ id: 'beach', name: 'Bãi biển', distance: '0.4 km' });
     expect(r.mapsUrl).toBe('https://maps/explicit');
     expect(r.embedUrl).toContain('output=embed');
   });

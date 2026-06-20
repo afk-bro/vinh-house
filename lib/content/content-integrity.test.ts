@@ -27,4 +27,12 @@ describe('content integrity (real folders + site.ts)', () => {
       for (const l of b.landmarks ?? []) expect(l.name.en, `${b.slug} landmark`).toBeTruthy();
     }
   });
+  it('every building amenityId references a known amenity in the catalog', () => {
+    const known = new Set(AMENITIES.map((a) => a.id));
+    for (const b of buildings) {
+      for (const id of b.amenityIds ?? []) {
+        expect(known.has(id), `${b.slug} references unknown amenity id "${id}"`).toBe(true);
+      }
+    }
+  });
 });

@@ -13,7 +13,7 @@ export type ResolvedRoom = {
   slug: string; name: string; price: string; status: 'available' | 'unavailable';
   buildingSlug: string; buildingName: string; blurb: string; alt: string; cover: Img; images: Img[];
 };
-export type ResolvedLandmark = { name: string; distance: string };
+export type ResolvedLandmark = { id: string; name: string; distance: string };
 export type ResolvedBuilding = {
   slug: string; folder: string; name: string; address: string; googleMapsUrl: string;
   blurb: string; alt: string; sortOrder: number; hidden?: boolean; comingSoon?: boolean;
@@ -47,7 +47,7 @@ export function resolveBuilding(
     sortOrder: meta.sortOrder, hidden: meta.hidden, comingSoon: meta.comingSoon,
     cover: images[0] ?? null, images, resolvedRooms,
     amenities: resolveAmenities(meta.amenityIds ?? [], locale),
-    landmarks: (meta.landmarks ?? []).map((l) => ({ name: pick(l.name, locale), distance: l.distance })),
+    landmarks: (meta.landmarks ?? []).map((l) => ({ id: l.id, name: pick(l.name, locale), distance: l.distance })),
     mapsUrl: mapsUrl(meta), embedUrl: embedUrl(meta), directionsUrl: directionsUrl(meta),
   };
 }

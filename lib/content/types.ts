@@ -18,7 +18,7 @@ export type RoomMeta = {
   alt: Localized<string>;
 };
 
-export type Landmark = { name: Localized<string>; distance: string };
+export type Landmark = { id: string; name: Localized<string>; distance: string };
 
 export type BuildingMeta = {
   slug: string;

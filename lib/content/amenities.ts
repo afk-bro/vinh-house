@@ -4,7 +4,7 @@ import type { Localized } from './localize';
 import { pick } from './localize';
 
 export type Amenity = { id: string; icon: string; label: Localized<string> };
-export type ResolvedAmenity = { icon: string; label: string };
+export type ResolvedAmenity = { id: string; icon: string; label: string };
 
 export const AMENITIES: Amenity[] = [
   { id: 'wifi', icon: '📶', label: { en: 'Free reliable high-speed Wi-Fi', vi: 'Wi-Fi miễn phí, tốc độ cao và ổn định', ko: '안정적인 무료 고속 Wi-Fi', 'zh-Hans': '免费稳定高速 Wi-Fi', ru: 'Бесплатный стабильный высокоскоростной Wi-Fi' } },
@@ -27,5 +27,5 @@ export function resolveAmenities(ids: string[], locale: Locale): ResolvedAmenity
   return ids
     .map((id) => BY_ID.get(id))
     .filter((a): a is Amenity => Boolean(a))
-    .map((a) => ({ icon: a.icon, label: pick(a.label, locale) }));
+    .map((a) => ({ id: a.id, icon: a.icon, label: pick(a.label, locale) }));
 }
