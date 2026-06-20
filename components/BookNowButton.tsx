@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 
 export default async function BookNowButton({ compact = false }: { compact?: boolean }) {
   const t = await getTranslations();
-  const size = compact ? 'px-5 py-2 text-xs tracking-[0.1em]' : '';
+  const size = compact ? 'px-5 py-2.5 text-xs tracking-[0.1em]' : '';
   return (
     <a
       href="#contact"
