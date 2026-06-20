@@ -12,7 +12,8 @@
     "comingSoon": "Sắp ra mắt",
     "menu": "Trình đơn"
   },
-  "booking": { "whatsapp": "WhatsApp", "phone": "Điện thoại", "facebook": "Facebook", "email": "Email" },
+  "booking": { "whatsapp": "WhatsApp", "phone": "Điện thoại", "facebook": "Facebook", "email": "Email", "zalo": "Zalo", "call": "Gọi điện" },
+  "contact": { "eyebrow": "Liên hệ", "heading": "Sẵn sàng đặt phòng tại Đà Nẵng?", "subtitle": "Nhắn tin hoặc gọi trực tiếp cho chúng tôi — chúng tôi phản hồi nhanh." },
   "hero": {
     "headline": "Căn hộ và khách sạn thoải mái cho thuê tại Đà Nẵng",
     "tagline": "Đặt trực tiếp, nhắn tin cho chủ nhà và tìm chỗ ở dễ dàng hơn.",

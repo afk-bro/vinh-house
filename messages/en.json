@@ -12,7 +12,12 @@
     "comingSoon": "Coming soon",
     "menu": "Menu"
   },
-  "booking": { "whatsapp": "WhatsApp", "phone": "Phone", "facebook": "Facebook", "email": "Email" },
+  "booking": { "whatsapp": "WhatsApp", "phone": "Phone", "facebook": "Facebook", "email": "Email", "zalo": "Zalo", "call": "Call" },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "heading": "Ready to book your stay in Da Nang?",
+    "subtitle": "Message or call us directly — we reply fast."
+  },
   "hero": {
     "headline": "Comfortable apartments and hotel rentals in Da Nang",
     "tagline": "Book direct, message the owner, and find your stay with less hassle.",

@@ -12,7 +12,8 @@
     "comingSoon": "Скоро",
     "menu": "Меню"
   },
-  "booking": { "whatsapp": "WhatsApp", "phone": "Телефон", "facebook": "Facebook", "email": "Эл. почта" },
+  "booking": { "whatsapp": "WhatsApp", "phone": "Телефон", "facebook": "Facebook", "email": "Эл. почта", "zalo": "Zalo", "call": "Позвонить" },
+  "contact": { "eyebrow": "Связаться с нами", "heading": "Готовы забронировать жильё в Дананге?", "subtitle": "Напишите или позвоните нам напрямую — мы быстро отвечаем." },
   "hero": {
     "headline": "Комфортная аренда апартаментов и отелей в Дананге",
     "tagline": "Бронируйте напрямую, пишите владельцу и находите жильё без лишних хлопот.",
