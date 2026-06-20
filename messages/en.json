@@ -9,7 +9,8 @@
     "scooterRental": "Scooter Rental",
     "bookNow": "Book now",
     "selectLanguage": "Select language",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "menu": "Menu"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "Phone", "facebook": "Facebook", "email": "Email" },
   "hero": {

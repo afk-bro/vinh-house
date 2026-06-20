@@ -9,7 +9,8 @@
     "scooterRental": "Thuê xe máy",
     "bookNow": "Đặt ngay",
     "selectLanguage": "Chọn ngôn ngữ",
-    "comingSoon": "Sắp ra mắt"
+    "comingSoon": "Sắp ra mắt",
+    "menu": "Trình đơn"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "Điện thoại", "facebook": "Facebook", "email": "Email" },
   "hero": {
