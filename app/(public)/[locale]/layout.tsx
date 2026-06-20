@@ -41,8 +41,12 @@ export default async function LocaleLayout({
 
   const fontVars = `${heading.variable} ${body.variable} ${notoKR.variable} ${notoSC.variable}`;
   return (
-    <html lang={locale} className={fontVars}>
+    <html lang={locale} className={fontVars} suppressHydrationWarning>
       <body className="bg-brand-forest text-text-primary">
+        {/* Adds the `js` class to <html> before hydration so scroll-reveals hide only
+            with JS available (no-JS stays fully visible). suppressHydrationWarning covers
+            the intentional <html> class diff this creates. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <NextIntlClientProvider>
           <Navbar />
           <main>{children}</main>

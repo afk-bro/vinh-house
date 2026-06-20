@@ -8,10 +8,16 @@ export default async function Footer() {
   const wa = whatsappUrl(contacts.whatsapp);
   const tel = telUrl(contacts.phone);
   const mail = mailtoUrl(contacts.email);
-  const link = 'text-sm text-[#FFF8ED]/80 transition hover:text-[var(--color-accent-gold)]';
+  const link = 'text-sm text-[#FFF8ED]/80 underline-offset-4 transition hover:text-[var(--color-accent-gold)] hover:underline';
   return (
-    <footer className="mt-20 bg-[var(--color-primary-dark)]">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
+    <>
+      <div aria-hidden className="mt-20 leading-[0]">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="block h-10 w-full sm:h-14">
+          <path d="M0,32 C320,60 560,4 880,26 C1100,42 1300,34 1440,30 L1440,60 L0,60 Z" fill="var(--color-primary-dark)" />
+        </svg>
+      </div>
+      <footer className="bg-[var(--color-primary-dark)]">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-12 pt-2 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
         <div className="flex items-start gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
           <div>
@@ -24,8 +30,9 @@ export default async function Footer() {
           {tel && <a className={link} href={tel}>{contacts.phone}</a>}
           {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer">{t('booking.whatsapp')}</a>}
           {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer">{t('booking.facebook')}</a>}
-        </nav>
-      </div>
-    </footer>
+          </nav>
+        </div>
+      </footer>
+    </>
   );
 }

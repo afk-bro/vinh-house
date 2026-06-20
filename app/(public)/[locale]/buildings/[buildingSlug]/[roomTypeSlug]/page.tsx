@@ -55,7 +55,7 @@ export default async function RoomPage(
       </Link>
       <div className="mt-2 flex flex-wrap items-center gap-4">
         <h1 className="font-heading text-4xl text-text-accent">{room.name}</h1>
-        <span className="rounded-full bg-accent-gold px-3 py-1 text-sm font-semibold text-[var(--color-text-primary)]">{room.price} · {t('room.perNight')}</span>
+        <span className="price-pill rounded-full px-3 py-1 text-sm font-semibold text-[var(--color-text-primary)]">{room.price} · {t('room.perNight')}</span>
         <span className={`text-sm font-medium ${available ? 'text-status-confirmed' : 'text-status-cancelled'}`}>
           {available ? t('room.available') : t('room.notAvailable')}
         </span>

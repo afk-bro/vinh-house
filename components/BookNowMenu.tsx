@@ -28,12 +28,12 @@ export default function BookNowMenu({ contacts, message, label }: Props) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="rounded-lg bg-cta px-5 py-2.5 font-medium text-text-inverse shadow-md shadow-cta/30 transition hover:bg-cta-hover"
+        className="rounded-lg bg-cta px-5 py-2.5 font-medium text-text-inverse shadow-md shadow-cta/30 transition hover:-translate-y-0.5 hover:bg-cta-hover hover:shadow-lg"
       >
         {label ?? t('nav.bookNow')}
       </button>
       {open && (
-        <div role="menu" className="absolute right-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
+        <div role="menu" className="menu-in absolute right-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
           {links.whatsapp && <a role="menuitem" className={item} href={links.whatsapp} target="_blank" rel="noopener noreferrer">{t('booking.whatsapp')}</a>}
           {links.phone && <a role="menuitem" className={item} href={links.phone}>{t('booking.phone')}</a>}
           {links.facebook && <a role="menuitem" className={item} href={links.facebook} target="_blank" rel="noopener noreferrer">{t('booking.facebook')}</a>}

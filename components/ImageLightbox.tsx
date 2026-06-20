@@ -39,7 +39,7 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNext, o
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-brand-forest/80 border border-accent-gold/30 text-accent-gold hover:bg-brand-forest hover:border-accent-gold/50 transition-all"
+        className="absolute top-4 right-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/95 text-[var(--color-primary-dark)] shadow-lg ring-1 ring-black/10 hover:bg-white hover:scale-105 transition-all"
         aria-label="Close lightbox"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNext, o
       {images.length > 1 && (
         <button
           onClick={onPrevious}
-          className="absolute left-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-brand-forest/80 border border-accent-gold/30 text-accent-gold hover:bg-brand-forest hover:border-accent-gold/50 transition-all"
+          className="absolute left-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/95 text-[var(--color-primary-dark)] shadow-lg ring-1 ring-black/10 hover:bg-white hover:scale-105 transition-all"
           aria-label="Previous image"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNext, o
       {images.length > 1 && (
         <button
           onClick={onNext}
-          className="absolute right-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-brand-forest/80 border border-accent-gold/30 text-accent-gold hover:bg-brand-forest hover:border-accent-gold/50 transition-all"
+          className="absolute right-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/95 text-[var(--color-primary-dark)] shadow-lg ring-1 ring-black/10 hover:bg-white hover:scale-105 transition-all"
           aria-label="Next image"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
