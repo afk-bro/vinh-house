@@ -4,9 +4,8 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import Container from '@/components/Container';
-import BookNowMenu from '@/components/BookNowMenu';
+import BookNowButton from '@/components/BookNowButton';
 import { getBuildings, getBuilding } from '@/lib/content';
-import { contacts } from '@/lib/content/site';
 import type { Locale } from '@/i18n/routing';
 
 export function generateStaticParams() {
@@ -55,7 +54,7 @@ export default async function BuildingPage(
           <p className="font-heading text-2xl text-text-accent">{t('building.comingSoonTitle')}</p>
           <p className="mt-2 text-text-secondary">{t('building.comingSoonBody')}</p>
           <div className="mt-6 flex justify-center">
-            <BookNowMenu contacts={contacts} message={t('inquiry.building', { building: b.name })} />
+            <BookNowButton />
           </div>
         </div>
       ) : (
@@ -81,7 +80,7 @@ export default async function BuildingPage(
             ))}
           </div>
           <div className="mt-10">
-            <BookNowMenu contacts={contacts} message={t('inquiry.building', { building: b.name })} />
+            <BookNowButton />
           </div>
         </>
       )}

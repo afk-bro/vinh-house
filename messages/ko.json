@@ -12,7 +12,8 @@
     "comingSoon": "준비 중",
     "menu": "메뉴"
   },
-  "booking": { "whatsapp": "WhatsApp", "phone": "전화", "facebook": "Facebook", "email": "이메일" },
+  "booking": { "whatsapp": "WhatsApp", "phone": "전화", "facebook": "Facebook", "email": "이메일", "zalo": "Zalo", "call": "전화" },
+  "contact": { "eyebrow": "문의하기", "heading": "다낭에서 숙소를 예약할 준비가 되셨나요?", "subtitle": "메시지를 보내거나 직접 전화 주세요 — 빠르게 답변드립니다." },
   "hero": {
     "headline": "다낭의 편안한 아파트 및 호텔 렌탈",
     "tagline": "직접 예약하고, 주인에게 문의하고, 번거로움 없이 숙소를 찾으세요.",

@@ -963,3 +963,31 @@ input[type="checkbox"]:disabled {
   .hero-rise { animation: none !important; opacity: 1 !important; transform: none !important; }
   .menu-in { animation: none !important; }
 }
+
+/* ============================================================================
+   CTA PILL (tmh-house-inspired) — color supplied via Tailwind classes.
+   In @layer components so per-instance Tailwind utilities (which live in the
+   later `utilities` layer) can override the base, e.g. the navbar compact size.
+   ============================================================================ */
+@layer components {
+  .cta-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .cta-pill:hover {
+    transform: translateY(-2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-pill:hover { transform: none; }
+  }
+}
