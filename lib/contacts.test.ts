@@ -86,3 +86,16 @@ describe('mailtoUrl with body', () => {
     );
   });
 });
+
+import { zaloUrl } from './contacts';
+
+describe('zaloUrl', () => {
+  it('builds a zalo.me link from digits (strips +/spaces)', () => {
+    expect(zaloUrl('+84 92 442 22 99')).toBe('https://zalo.me/84924422299');
+  });
+  it('returns null for empty/nullish', () => {
+    expect(zaloUrl('')).toBeNull();
+    expect(zaloUrl(null)).toBeNull();
+    expect(zaloUrl('   ')).toBeNull();
+  });
+});

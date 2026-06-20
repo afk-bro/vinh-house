@@ -40,3 +40,10 @@ export function mailtoUrl(
   // URLSearchParams encodes spaces as '+'; mail clients expect %20.
   return `mailto:${email}${q ? `?${q.replace(/\+/g, '%20')}` : ''}`;
 }
+
+/** Builds a zalo.me link from a phone number (digits only, leading + stripped). */
+export function zaloUrl(number: string | null | undefined): string | null {
+  if (!number) return null;
+  const digits = number.replace(/[^\d]/g, '');
+  return digits ? `https://zalo.me/${digits}` : null;
+}
