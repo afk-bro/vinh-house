@@ -39,7 +39,7 @@
     "comingSoonTitle": "Details coming soon",
     "comingSoonBody": "We're preparing the listings for this building."
   },
-  "room": { "available": "Available", "notAvailable": "Not available" },
+  "room": { "available": "Available", "notAvailable": "Not available", "perNight": "per night" },
   "cta": {
     "readyToBook": "Ready to find your room in Da Nang?",
     "readyToBookBody": "Message us directly and we'll help you choose the best option."

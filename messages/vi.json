@@ -39,7 +39,7 @@
     "comingSoonTitle": "Thông tin sắp có",
     "comingSoonBody": "Chúng tôi đang chuẩn bị danh sách cho tòa nhà này."
   },
-  "room": { "available": "Còn trống", "notAvailable": "Hết phòng" },
+  "room": { "available": "Còn trống", "notAvailable": "Hết phòng", "perNight": "mỗi đêm" },
   "cta": {
     "readyToBook": "Sẵn sàng tìm phòng tại Đà Nẵng?",
     "readyToBookBody": "Nhắn tin trực tiếp cho chúng tôi và chúng tôi sẽ giúp bạn chọn lựa chọn tốt nhất."

@@ -39,7 +39,7 @@
     "comingSoonTitle": "세부 정보 준비 중",
     "comingSoonBody": "이 건물의 목록을 준비하고 있습니다."
   },
-  "room": { "available": "이용 가능", "notAvailable": "이용 불가" },
+  "room": { "available": "이용 가능", "notAvailable": "이용 불가", "perNight": "1박당" },
   "cta": {
     "readyToBook": "다낭에서 객실을 찾을 준비가 되셨나요?",
     "readyToBookBody": "저희에게 직접 문의하시면 가장 좋은 옵션을 선택하도록 도와드리겠습니다."
