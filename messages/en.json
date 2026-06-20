@@ -53,5 +53,15 @@
     "homeTitle": "Vĩnh House — Apartments and Hotel Rentals in Da Nang",
     "homeDescription": "Direct booked boutique apartments and hotels in Da Nang. Book direct, pay less, message the owner.",
     "titleSuffix": "Vĩnh House Da Nang"
+  },
+  "roomInfo": {
+    "amenitiesHeading": "Amenities",
+    "locationHeading": "Location",
+    "openInMaps": "Open in Google Maps",
+    "directions": "Get directions",
+    "askWhatsApp": "Ask us on WhatsApp",
+    "aroundHeading": "Around the apartment",
+    "approx": "Approx.",
+    "faqHeading": "Frequently asked"
   }
 }

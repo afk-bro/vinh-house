@@ -53,5 +53,15 @@
     "homeTitle": "Vĩnh House — 다낭 아파트 및 호텔 렌탈",
     "homeDescription": "다낭의 직접 예약 부티크 아파트 및 호텔. 직접 예약하고, 더 저렴하게, 주인에게 직접 문의하세요.",
     "titleSuffix": "Vĩnh House 다낭"
+  },
+  "roomInfo": {
+    "amenitiesHeading": "편의시설",
+    "locationHeading": "위치",
+    "openInMaps": "Google 지도에서 열기",
+    "directions": "길찾기",
+    "askWhatsApp": "WhatsApp으로 문의하기",
+    "aroundHeading": "아파트 주변",
+    "approx": "약",
+    "faqHeading": "자주 묻는 질문"
   }
 }

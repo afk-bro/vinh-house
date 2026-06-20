@@ -53,5 +53,15 @@
     "homeTitle": "Vĩnh House — Cho thuê căn hộ và khách sạn tại Đà Nẵng",
     "homeDescription": "Căn hộ và khách sạn boutique đặt trực tiếp tại Đà Nẵng. Đặt trực tiếp, tiết kiệm hơn, nhắn tin cho chủ nhà.",
     "titleSuffix": "Vĩnh House Đà Nẵng"
+  },
+  "roomInfo": {
+    "amenitiesHeading": "Tiện nghi",
+    "locationHeading": "Vị trí",
+    "openInMaps": "Mở trong Google Maps",
+    "directions": "Chỉ đường",
+    "askWhatsApp": "Nhắn cho chúng tôi qua WhatsApp",
+    "aroundHeading": "Xung quanh căn hộ",
+    "approx": "Khoảng",
+    "faqHeading": "Câu hỏi thường gặp"
   }
 }
