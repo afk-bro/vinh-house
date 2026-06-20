@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import type { Contacts } from '@/lib/content/types';
 import { buildInquiryLinks } from '@/lib/content/inquiry';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 type Props = { contacts: Contacts; message: string; label?: string };
 
@@ -34,7 +35,7 @@ export default function BookNowMenu({ contacts, message, label }: Props) {
       </button>
       {open && (
         <div role="menu" className="menu-in absolute right-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border border-[var(--color-border-default)] bg-surface-card shadow-2xl">
-          {links.whatsapp && <a role="menuitem" className={item} href={links.whatsapp} target="_blank" rel="noopener noreferrer">{t('booking.whatsapp')}</a>}
+          {links.whatsapp && <a role="menuitem" className={`${item} flex items-center gap-2`} href={links.whatsapp} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="h-4 w-4 text-[#25D366]" />{t('booking.whatsapp')}</a>}
           {links.phone && <a role="menuitem" className={item} href={links.phone}>{t('booking.phone')}</a>}
           {links.facebook && <a role="menuitem" className={item} href={links.facebook} target="_blank" rel="noopener noreferrer">{t('booking.facebook')}</a>}
           {links.email && <a role="menuitem" className={item} href={links.email}>{t('booking.email')}</a>}

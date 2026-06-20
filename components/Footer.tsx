@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { contacts } from '@/lib/content/site';
 import { whatsappUrl, telUrl, mailtoUrl } from '@/lib/contacts';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 export default async function Footer() {
   const t = await getTranslations();
@@ -28,7 +29,7 @@ export default async function Footer() {
         <nav className="flex flex-col gap-2">
           {mail && <a className={link} href={mail}>{contacts.email}</a>}
           {tel && <a className={link} href={tel}>{contacts.phone}</a>}
-          {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer">{t('booking.whatsapp')}</a>}
+          {wa && <a className={`${link} inline-flex items-center gap-2`} href={wa} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="h-4 w-4" />{t('booking.whatsapp')}</a>}
           {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer">{t('booking.facebook')}</a>}
           </nav>
         </div>
