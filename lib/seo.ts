@@ -1,11 +1,15 @@
 // lib/seo.ts — SEO URL helpers shared by metadata + sitemap.
 import { routing } from '@/i18n/routing';
 
-/** URL prefix for a locale (default locale is unprefixed; zh-Hans serves at /zh). */
+/**
+ * URL prefix for a locale, derived from the routing config so it stays in sync
+ * with `localePrefix.prefixes` (default locale is unprefixed under `as-needed`;
+ * custom prefixes like zh-Hans → /zh come straight from routing).
+ */
 export function localePrefix(locale: string): string {
   if (locale === routing.defaultLocale) return '';
-  if (locale === 'zh-Hans') return '/zh';
-  return `/${locale}`;
+  const prefixes = (routing.localePrefix as { prefixes?: Record<string, string> }).prefixes;
+  return prefixes?.[locale] ?? `/${locale}`;
 }
 
 /**

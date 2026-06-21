@@ -44,10 +44,11 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNext, o
   // Lock body scroll, move focus into the dialog, and restore focus on close.
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = prevOverflow;
       previouslyFocused?.focus?.();
     };
   }, []);
