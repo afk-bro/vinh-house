@@ -51,5 +51,7 @@ export function lodgingJsonLd(input: LodgingInput): string {
       availability: 'https://schema.org/InStock',
     };
   }
-  return JSON.stringify(data);
+  // Escape `<` so the JSON can't break out of the inline <script> tag,
+  // even if content ever becomes CMS-editable.
+  return JSON.stringify(data).replace(/</g, '\\u003c');
 }
