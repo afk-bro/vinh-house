@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation';
 import Container from '@/components/Container';
 import BookNowButton from '@/components/BookNowButton';
 import { getBuildings, getBuilding } from '@/lib/content';
+import { localeAlternates } from '@/lib/seo';
 import type { Locale } from '@/i18n/routing';
 
 export function generateStaticParams() {
@@ -22,6 +23,7 @@ export async function generateMetadata(
   return {
     title: b.name,
     description: b.blurb,
+    alternates: localeAlternates(locale, `/buildings/${buildingSlug}`),
     openGraph: { title: `${b.name} — ${t('titleSuffix')}`, description: b.blurb, images: b.cover ? [b.cover.src] : [] },
   };
 }
@@ -51,7 +53,7 @@ export default async function BuildingPage(
 
       {b.comingSoon ? (
         <div className="my-12 rounded-lg border border-[var(--color-border-default)] bg-surface-card p-8 text-center">
-          <p className="font-heading text-2xl text-text-accent">{t('building.comingSoonTitle')}</p>
+          <h2 className="font-heading text-2xl text-text-accent">{t('building.comingSoonTitle')}</h2>
           <p className="mt-2 text-text-secondary">{t('building.comingSoonBody')}</p>
           <div className="mt-6 flex justify-center">
             <BookNowButton />
@@ -62,7 +64,7 @@ export default async function BuildingPage(
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {b.resolvedRooms.map((r) => (
               <Link key={r.slug} href={`/buildings/${b.slug}/${r.slug}`}
-                className="group relative block overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                className="group relative block overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2">
                 {r.cover.src && (
                   <div className="h-52 w-full overflow-hidden">
                     <Image src={r.cover.src} alt={r.cover.alt} width={480} height={320}
@@ -75,7 +77,7 @@ export default async function BuildingPage(
                   style={{ color: r.status === 'available' ? 'var(--color-status-confirmed)' : 'var(--color-status-cancelled)' }}>
                   {r.status === 'available' ? t('room.available') : t('room.notAvailable')}
                 </span>
-                <div className="p-5"><h3 className="font-heading text-xl text-text-accent">{r.name}</h3></div>
+                <div className="p-5"><h2 className="font-heading text-xl text-text-accent">{r.name}</h2></div>
               </Link>
             ))}
           </div>

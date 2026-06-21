@@ -4,6 +4,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { localeAlternates } from '@/lib/seo';
 import Navbar from '@/components/Navbar';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: { default: t('homeTitle'), template: `%s — ${t('titleSuffix')}` },
     description: t('homeDescription'),
     icons: { icon: '/logo.png' },
+    alternates: localeAlternates(locale),
     openGraph: { title: t('homeTitle'), description: t('homeDescription'), images: ['/hero.jpg'], type: 'website' },
   };
 }

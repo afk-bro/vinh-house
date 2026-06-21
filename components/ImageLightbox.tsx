@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 type Props = {
@@ -13,31 +13,57 @@ type Props = {
 
 export default function ImageLightbox({ images, currentIndex, onClose, onNext, onPrevious }: Props) {
   const currentImage = images[currentIndex];
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Handle keyboard navigation
+  // Keyboard: Esc closes, arrows navigate, Tab is trapped within the dialog.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onNext();
-      if (e.key === "ArrowLeft") onPrevious();
+      if (e.key === "Escape") return onClose();
+      if (e.key === "ArrowRight") return onNext();
+      if (e.key === "ArrowLeft") return onPrevious();
+      if (e.key === "Tab") {
+        const focusables = dialogRef.current?.querySelectorAll<HTMLElement>("button");
+        if (!focusables || focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose, onNext, onPrevious]);
 
-  // Prevent body scroll when lightbox is open
+  // Lock body scroll, move focus into the dialog, and restore focus on close.
   useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus?.();
     };
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm">
+    <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={currentImage.alt || "Image gallery"}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
+    >
       {/* Close button */}
       <button
+        ref={closeButtonRef}
         onClick={onClose}
         className="absolute top-4 right-4 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/95 text-[var(--color-primary-dark)] shadow-lg ring-1 ring-black/10 hover:bg-white hover:scale-105 transition-all"
         aria-label="Close lightbox"

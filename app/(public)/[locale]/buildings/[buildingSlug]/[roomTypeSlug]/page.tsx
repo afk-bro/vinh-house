@@ -11,6 +11,7 @@ import LocationSection from '@/components/room/LocationSection';
 import AroundSection from '@/components/room/AroundSection';
 import Faq from '@/components/room/Faq';
 import { getBuildings, getBuilding, getRoom, getFaq } from '@/lib/content';
+import { localeAlternates } from '@/lib/seo';
 import { contacts } from '@/lib/content/site';
 import type { Locale } from '@/i18n/routing';
 
@@ -30,6 +31,7 @@ export async function generateMetadata(
   return {
     title: `${room.name} · ${room.buildingName}`,
     description: room.blurb,
+    alternates: localeAlternates(locale, `/buildings/${buildingSlug}/${roomTypeSlug}`),
     openGraph: { title: `${room.name} · ${room.buildingName} — ${t('titleSuffix')}`, description: room.blurb, images: room.cover.src ? [room.cover.src] : [] },
   };
 }

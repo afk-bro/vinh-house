@@ -48,8 +48,8 @@
   /* Coastal palette additions */
   --color-primary: #0F766E;             /* coastal teal */
   --color-primary-dark: #064E4A;        /* deep teal — footer */
-  --color-cta: #F97316;                 /* soft orange / coral — primary CTA */
-  --color-cta-hover: #EA670C;
+  --color-cta: #C2410C;                 /* coral — primary CTA (AA-contrast with white) */
+  --color-cta-hover: #9A330A;
 
   /* Semantic Surface Tokens */
   --color-surface-primary: var(--color-brand-forest);
@@ -75,13 +75,13 @@
   --color-status-pending-bg: rgba(200, 167, 90, 0.1);
   --color-status-pending-border: rgba(200, 167, 90, 0.25);
 
-  --color-status-confirmed: #7fb069;
-  --color-status-confirmed-bg: rgba(127, 176, 105, 0.1);
-  --color-status-confirmed-border: rgba(127, 176, 105, 0.25);
+  --color-status-confirmed: #3F7D2E;
+  --color-status-confirmed-bg: rgba(63, 125, 46, 0.1);
+  --color-status-confirmed-border: rgba(63, 125, 46, 0.25);
 
-  --color-status-cancelled: #c97064;
-  --color-status-cancelled-bg: rgba(201, 112, 100, 0.1);
-  --color-status-cancelled-border: rgba(201, 112, 100, 0.25);
+  --color-status-cancelled: #A23B2E;
+  --color-status-cancelled-bg: rgba(162, 59, 46, 0.1);
+  --color-status-cancelled-border: rgba(162, 59, 46, 0.25);
 
   --color-status-active: #5ca3b8;
   --color-status-active-bg: rgba(92, 163, 184, 0.1);
