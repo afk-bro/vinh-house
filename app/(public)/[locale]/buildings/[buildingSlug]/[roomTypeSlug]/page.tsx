@@ -12,6 +12,7 @@ import AroundSection from '@/components/room/AroundSection';
 import Faq from '@/components/room/Faq';
 import { getBuildings, getBuilding, getRoom, getFaq } from '@/lib/content';
 import { localeAlternates } from '@/lib/seo';
+import { lodgingJsonLd } from '@/lib/jsonld';
 import { contacts } from '@/lib/content/site';
 import type { Locale } from '@/i18n/routing';
 
@@ -55,8 +56,21 @@ export default async function RoomPage(
   const faq = getFaq(locale as Locale);
 
   const available = room.status === 'available';
+  const priceVnd = Number(room.price.replace(/[^\d]/g, '')) || null;
+  const jsonLd = lodgingJsonLd({
+    locale,
+    path: `/buildings/${buildingSlug}/${roomTypeSlug}`,
+    name: `${room.name} · ${room.buildingName}`,
+    description: room.blurb,
+    image: room.cover?.src,
+    streetAddress: building.address,
+    telephone: contacts.phone ?? undefined,
+    priceVnd,
+  });
   return (
-    <Container>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <Container>
       <Link href={`/buildings/${building.slug}`} className="mt-8 inline-block text-sm text-text-muted hover:text-text-accent">
         ← {building.name}
       </Link>
@@ -82,6 +96,7 @@ export default async function RoomPage(
       />
       <AroundSection landmarks={building.landmarks} />
       <Faq items={faq} />
-    </Container>
+      </Container>
+    </>
   );
 }

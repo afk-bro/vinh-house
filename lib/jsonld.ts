@@ -1,0 +1,55 @@
+// lib/jsonld.ts — schema.org LodgingBusiness structured data for SEO rich results.
+import { localePrefix } from './seo';
+
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example';
+
+/** Resolves a content path (relative or absolute) to an absolute URL. */
+function absUrl(path: string): string {
+  if (!path) return BASE;
+  if (path.startsWith('http')) return path;
+  return `${BASE}${path.startsWith('/') ? '' : '/'}${path}`;
+}
+
+type LodgingInput = {
+  locale: string;
+  /** Page path without the locale prefix, e.g. `/buildings/gilda-hotel`. */
+  path: string;
+  name: string;
+  description: string;
+  /** Content image src (relative or absolute). */
+  image?: string;
+  streetAddress?: string;
+  telephone?: string;
+  /** Nightly price in VND, if known (numeric). */
+  priceVnd?: number | null;
+};
+
+/** Builds a JSON.stringify-ready LodgingBusiness object for a building or room page. */
+export function lodgingJsonLd(input: LodgingInput): string {
+  const url = `${BASE}${localePrefix(input.locale)}${input.path}` || BASE;
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: input.name,
+    description: input.description,
+    url,
+    address: {
+      '@type': 'PostalAddress',
+      ...(input.streetAddress ? { streetAddress: input.streetAddress } : {}),
+      addressLocality: 'Da Nang',
+      addressCountry: 'VN',
+    },
+  };
+  if (input.image) data.image = absUrl(input.image);
+  if (input.telephone) data.telephone = input.telephone;
+  if (input.priceVnd && input.priceVnd > 0) {
+    data.priceRange = `${input.priceVnd.toLocaleString('en-US')}₫`;
+    data.makesOffer = {
+      '@type': 'Offer',
+      priceCurrency: 'VND',
+      price: input.priceVnd,
+      availability: 'https://schema.org/InStock',
+    };
+  }
+  return JSON.stringify(data);
+}

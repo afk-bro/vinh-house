@@ -7,6 +7,8 @@ import Container from '@/components/Container';
 import BookNowButton from '@/components/BookNowButton';
 import { getBuildings, getBuilding } from '@/lib/content';
 import { localeAlternates } from '@/lib/seo';
+import { lodgingJsonLd } from '@/lib/jsonld';
+import { contacts } from '@/lib/content/site';
 import type { Locale } from '@/i18n/routing';
 
 export function generateStaticParams() {
@@ -37,8 +39,20 @@ export default async function BuildingPage(
   if (!b) notFound();
   const t = await getTranslations();
 
+  const jsonLd = lodgingJsonLd({
+    locale,
+    path: `/buildings/${buildingSlug}`,
+    name: b.name,
+    description: b.blurb,
+    image: b.cover?.src,
+    streetAddress: b.address,
+    telephone: contacts.phone ?? undefined,
+  });
+
   return (
-    <Container>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <Container>
       <div className="mt-10">
         <h1 className="font-heading text-4xl text-text-accent">{b.name}</h1>
         <p className="text-text-muted">{b.address}</p>
@@ -87,5 +101,6 @@ export default async function BuildingPage(
         </>
       )}
     </Container>
+    </>
   );
 }
