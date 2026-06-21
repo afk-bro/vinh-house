@@ -13,7 +13,7 @@
     "menu": "Trình đơn"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "Điện thoại", "facebook": "Facebook", "email": "Email", "zalo": "Zalo", "call": "Gọi điện" },
-  "contact": { "eyebrow": "Liên hệ", "heading": "Sẵn sàng đặt phòng tại Đà Nẵng?", "subtitle": "Nhắn tin hoặc gọi trực tiếp cho chúng tôi — chúng tôi phản hồi nhanh." },
+  "contact": { "eyebrow": "Liên hệ", "heading": "Sẵn sàng kiểm tra phòng trống?", "subtitle": "Nhắn tin trực tiếp cho chúng tôi để biết phòng, giá và lưu trú theo tháng." },
   "hero": {
     "headline": "Căn hộ và khách sạn thoải mái cho thuê tại Đà Nẵng",
     "tagline": "Đặt trực tiếp, nhắn tin cho chủ nhà và tìm chỗ ở dễ dàng hơn.",
@@ -31,6 +31,7 @@
   },
   "buildings": {
     "heading": "Các tòa nhà của chúng tôi",
+    "intro": "Căn hộ và phòng khách sạn boutique khắp Đà Nẵng — chọn một tòa nhà để xem phòng, giá và tình trạng còn trống.",
     "comingSoonShort": "Thông tin sắp có",
     "roomType": "loại phòng",
     "roomTypes": "loại phòng",

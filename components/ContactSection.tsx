@@ -15,7 +15,7 @@ export default async function ContactSection() {
   const zalo = zaloUrl(contacts.whatsapp);
   const tel = telUrl(contacts.phone);
   return (
-    <section id="contact" className="scroll-mt-20 py-16">
+    <section id="contact" className="scroll-mt-24 py-16">
       <Container>
         <Reveal>
           <div className="flex flex-col items-center gap-5 rounded-2xl bg-gradient-to-br from-[#FFF4DF] via-[var(--color-surface-secondary)] to-[#FBE6C4] px-6 py-14 text-center shadow-sm">

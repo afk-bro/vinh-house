@@ -982,10 +982,15 @@ input[type="checkbox"]:disabled {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
+    white-space: nowrap;
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
   .cta-pill:hover {
     transform: translateY(-2px);
+  }
+  .cta-pill:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
     .cta-pill:hover { transform: none; }
