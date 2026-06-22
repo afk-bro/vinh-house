@@ -22,6 +22,8 @@ type LodgingInput = {
   telephone?: string;
   /** Nightly price in VND, if known (numeric). */
   priceVnd?: number | null;
+  /** Whether the room is available; `false` emits an OutOfStock Offer. Defaults to in-stock. */
+  available?: boolean;
 };
 
 /** Builds a JSON.stringify-ready LodgingBusiness object for a building or room page. */
@@ -48,7 +50,10 @@ export function lodgingJsonLd(input: LodgingInput): string {
       '@type': 'Offer',
       priceCurrency: 'VND',
       price: input.priceVnd,
-      availability: 'https://schema.org/InStock',
+      availability:
+        input.available === false
+          ? 'https://schema.org/OutOfStock'
+          : 'https://schema.org/InStock',
     };
   }
   // Escape `<` so the JSON can't break out of the inline <script> tag,

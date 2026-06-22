@@ -62,6 +62,20 @@ describe('lodgingJsonLd', () => {
     });
   });
 
+  it('emits an OutOfStock Offer when available is false', () => {
+    const d = JSON.parse(
+      lodgingJsonLd({
+        locale: 'en',
+        path: '/buildings/x/1-bedroom',
+        name: 'Room',
+        description: 'D',
+        priceVnd: 700000,
+        available: false,
+      }),
+    );
+    expect(d.makesOffer.availability).toBe('https://schema.org/OutOfStock');
+  });
+
   it('does not add an Offer when priceVnd is null or zero', () => {
     const none = JSON.parse(lodgingJsonLd({ locale: 'en', path: '', name: 'N', description: 'D', priceVnd: null }));
     const zero = JSON.parse(lodgingJsonLd({ locale: 'en', path: '', name: 'N', description: 'D', priceVnd: 0 }));

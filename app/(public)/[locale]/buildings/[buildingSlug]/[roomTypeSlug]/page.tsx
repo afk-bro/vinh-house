@@ -66,6 +66,7 @@ export default async function RoomPage(
     streetAddress: building.address,
     telephone: contacts.phone ?? undefined,
     priceVnd,
+    available,
   });
   return (
     <>
