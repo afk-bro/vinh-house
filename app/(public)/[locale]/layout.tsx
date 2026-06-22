@@ -4,7 +4,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { localeAlternates } from '@/lib/seo';
+import { localeAlternates, SITE_URL } from '@/lib/seo';
 import Navbar from '@/components/Navbar';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'seo' });
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example'),
+    metadataBase: new URL(SITE_URL),
     title: { default: t('homeTitle'), template: `%s — ${t('titleSuffix')}` },
     description: t('homeDescription'),
     alternates: localeAlternates(locale),

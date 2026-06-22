@@ -2,6 +2,13 @@
 import { routing } from '@/i18n/routing';
 
 /**
+ * Absolute site origin, with any trailing slash stripped so callers can safely concatenate
+ * `${SITE_URL}${path}` without risking `https://host//path`. Falls back to a placeholder
+ * origin in dev/test when NEXT_PUBLIC_SITE_URL is unset (next.config warns at build time).
+ */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example').replace(/\/+$/, '');
+
+/**
  * URL prefix for a locale, derived from the routing config so it stays in sync
  * with `localePrefix.prefixes` (default locale is unprefixed under `as-needed`;
  * custom prefixes like zh-Hans → /zh come straight from routing).

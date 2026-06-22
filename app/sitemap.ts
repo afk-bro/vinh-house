@@ -1,9 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getBuildings } from '@/lib/content';
 import { routing } from '@/i18n/routing';
-import { localePrefix } from '@/lib/seo';
-
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example';
+import { localePrefix, SITE_URL as BASE } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const urls: MetadataRoute.Sitemap = [];
