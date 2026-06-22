@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Fraunces, Inter, Noto_Sans_KR, Noto_Sans_SC } from 'next/font/google';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -17,6 +17,13 @@ const heading = Fraunces({
 const body = Inter({ subsets: ['latin', 'latin-ext', 'cyrillic', 'vietnamese'], variable: '--font-body-loaded' });
 const notoKR = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-noto-kr' });
 const notoSC = Noto_Sans_SC({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-noto-sc' });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#0F766E',
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -40,6 +47,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const t = await getTranslations();
 
   const fontVars = `${heading.variable} ${body.variable} ${notoKR.variable} ${notoSC.variable}`;
   return (
@@ -50,8 +58,14 @@ export default async function LocaleLayout({
             the intentional <html> class diff this creates. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <NextIntlClientProvider>
+          <a
+            href="#main"
+            className="sr-only z-[60] rounded-lg bg-surface-card px-4 py-2 text-sm font-medium text-text-accent shadow-lg focus:not-sr-only focus:absolute focus:left-4 focus:top-4"
+          >
+            {t('nav.skipToContent')}
+          </a>
           <Navbar />
-          <main>{children}</main>
+          <main id="main" tabIndex={-1}>{children}</main>
           <ContactSection />
           <Footer />
         </NextIntlClientProvider>

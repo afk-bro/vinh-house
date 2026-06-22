@@ -44,6 +44,16 @@ export default function MobileNav({ items, motorbikeUrl }: { items: Item[]; moto
     };
   }, []);
 
+  // Lock body scroll while the menu panel is open (restored on close).
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   function switchTo(locale: Locale) {
     setOpen(false);
     startTransition(() => router.replace(pathname, { locale }));

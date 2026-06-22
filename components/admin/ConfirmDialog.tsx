@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useId } from "react";
 import { AlertTriangle, X } from "lucide-react";
 
 interface ConfirmDialogProps {
@@ -25,6 +26,18 @@ export default function ConfirmDialog({
   variant = 'info',
   isSubmitting = false
 }: ConfirmDialogProps) {
+  const titleId = useId();
+
+  // Close on Escape while the dialog is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const variantStyles = {
@@ -53,21 +66,27 @@ export default function ConfirmDialog({
         className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] transition-opacity animate-in fade-in duration-200"
         onClick={onClose}
       />
-      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-[101] animate-in zoom-in-95 duration-200">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-[101] animate-in zoom-in-95 duration-200"
+      >
         <div className={`bg-[var(--color-surface-card)] rounded-xl shadow-2xl overflow-hidden border ${activeStyles.border}`}>
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-[var(--color-surface-elevated)] border-b border-[var(--color-border-subtle)]">
             <div className="flex items-center gap-3">
               {activeStyles.icon}
-              <h3 className="font-heading font-bold text-lg text-[var(--color-text-primary)]">
+              <h3 id={titleId} className="font-heading font-bold text-lg text-[var(--color-text-primary)]">
                 {title}
               </h3>
             </div>
-            <button 
+            <button
               onClick={onClose}
+              aria-label={cancelLabel}
               className="p-1.5 hover:bg-[var(--color-surface-card)] rounded-full transition-surface text-[var(--color-text-muted)]"
             >
-              <X size={18} />
+              <X size={18} aria-hidden="true" />
             </button>
           </div>
 

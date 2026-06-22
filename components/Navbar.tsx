@@ -15,9 +15,9 @@ export default async function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
         <Link href="/" className="flex min-w-0 items-center gap-3">
           <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="h-10 w-10 rounded sm:h-11 sm:w-11" />
-          <span className="leading-tight">
-            <span className="block whitespace-nowrap font-heading text-xl text-text-accent sm:text-2xl">{t('brand.name')}</span>
-            <span className="hidden text-[11px] text-text-muted md:block">{t('brand.subtitle')}</span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-heading text-xl text-text-accent sm:text-2xl">{t('brand.name')}</span>
+            <span className="hidden truncate text-[11px] text-text-muted md:block">{t('brand.subtitle')}</span>
           </span>
         </Link>
         <div className="ml-auto flex items-center gap-2 sm:gap-3">

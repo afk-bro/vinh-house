@@ -10,14 +10,16 @@
     "bookNow": "立即预订",
     "selectLanguage": "选择语言",
     "comingSoon": "即将推出",
-    "menu": "菜单"
+    "menu": "菜单",
+    "skipToContent": "跳到主要内容"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "电话", "facebook": "Facebook", "email": "电子邮件", "zalo": "Zalo", "call": "致电" },
   "contact": { "eyebrow": "联系我们", "heading": "准备好查询空房了吗？", "subtitle": "直接联系我们了解房间、价格和长租（按月）。" },
   "hero": {
     "headline": "岘港舒适的公寓与酒店租赁",
     "tagline": "直接预订，联系房东，轻松找到您的住处。",
-    "viewApartments": "查看公寓"
+    "viewApartments": "查看公寓",
+    "imageAlt": "黄昏时分的岘港天际线"
   },
   "valueProps": {
     "bookDirect": { "title": "直接预订，更省钱", "body": "没有平台费用或中介——直接联系我们。" },
@@ -42,7 +44,7 @@
     "comingSoonTitle": "详情即将公布",
     "comingSoonBody": "我们正在准备该楼宇的房源信息。"
   },
-  "room": { "available": "可入住", "notAvailable": "暂无空房", "perNight": "每晚" },
+  "room": { "available": "可入住", "notAvailable": "暂无空房", "perNight": "每晚", "photosComingSoon": "照片即将上线" },
   "cta": {
     "readyToBook": "准备好在岘港找房间了吗？",
     "readyToBookBody": "直接联系我们，我们将帮您选择最合适的方案。"
@@ -66,5 +68,10 @@
     "aroundHeading": "公寓周边",
     "approx": "约",
     "faqHeading": "常见问题"
+  },
+  "notFound": {
+    "title": "未找到页面",
+    "body": "您查找的页面不存在或可能已被移动。",
+    "home": "返回首页"
   }
 }

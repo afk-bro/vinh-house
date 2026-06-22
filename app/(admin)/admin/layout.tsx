@@ -5,7 +5,6 @@ import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { ToastProvider } from "@/components/ui/Toast";
-import { ViewportModeProvider } from "@/components/providers/ViewportModeProvider";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { isAuthPage as checkIsAuthPage, ADMIN_ROUTES } from "@/lib/admin/constants";
 
@@ -54,18 +53,20 @@ export default function AdminLayout({
     }
 
     return (
-        <ViewportModeProvider>
-            <ToastProvider>
-                <div className="min-h-screen bg-[var(--color-surface-elevated)]">
-                    {!isAuthPage && (
-                        <AdminNav
-                            userEmail={user?.email}
-                            onLogout={handleLogout}
-                        />
-                    )}
+        <ToastProvider>
+            <div className="min-h-screen bg-[var(--color-surface-elevated)]">
+                {!isAuthPage && (
+                    <AdminNav
+                        userEmail={user?.email}
+                        onLogout={handleLogout}
+                    />
+                )}
+                {/* Pad the bottom on phones so content isn't hidden behind the fixed bottom nav
+                    (4rem bar height + the device safe-area inset). Cleared at md+ where the nav is on top. */}
+                <div className={!isAuthPage ? 'pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0' : undefined}>
                     {children}
                 </div>
-            </ToastProvider>
-        </ViewportModeProvider>
+            </div>
+        </ToastProvider>
     );
 }

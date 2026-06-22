@@ -65,7 +65,7 @@ export default async function BuildingPage(
         <p className="mt-4 max-w-2xl text-text-secondary">{b.blurb}</p>
       </div>
 
-      {b.comingSoon ? (
+      {b.comingSoon || b.resolvedRooms.length === 0 ? (
         <div className="my-12 rounded-lg border border-[var(--color-border-default)] bg-surface-card p-8 text-center">
           <h2 className="font-heading text-2xl text-text-accent">{t('building.comingSoonTitle')}</h2>
           <p className="mt-2 text-text-secondary">{t('building.comingSoonBody')}</p>
@@ -79,11 +79,17 @@ export default async function BuildingPage(
             {b.resolvedRooms.map((r) => (
               <Link key={r.slug} href={`/buildings/${b.slug}/${r.slug}`}
                 className="group relative block overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-surface-card shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2">
-                {r.cover.src && (
+                {r.cover.src ? (
                   <div className="h-52 w-full overflow-hidden">
                     <Image src={r.cover.src} alt={r.cover.alt} width={480} height={320}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="h-52 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
+                  </div>
+                ) : (
+                  // Neutral placeholder so the absolutely-positioned price/status pills have a
+                  // backdrop and don't overlap the title when a room has no photos yet.
+                  <div className="flex h-52 w-full items-center justify-center bg-[var(--color-surface-secondary)] text-sm text-text-muted">
+                    {t('room.photosComingSoon')}
                   </div>
                 )}
                 <span className="price-pill absolute left-3 top-3 rounded-full px-3 py-1 text-sm font-semibold text-[var(--color-text-primary)]">{r.price} · {t('room.perNight')}</span>

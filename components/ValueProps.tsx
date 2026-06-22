@@ -20,7 +20,7 @@ export default async function ValueProps() {
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-surface-secondary)] text-[var(--color-primary)]">
                 <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
               </span>
-              <h3 className="mt-4 font-heading text-2xl text-text-accent">{t(`${key}.title`)}</h3>
+              <h2 className="mt-4 font-heading text-2xl text-text-accent">{t(`${key}.title`)}</h2>
               <p className="mt-2 text-text-primary">{t(`${key}.body`)}</p>
             </Reveal>
           ))}

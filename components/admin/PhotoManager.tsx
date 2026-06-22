@@ -52,8 +52,8 @@ export default function PhotoManager({
 
   return (
     <div className="mt-4">
-      <input type="file" accept="image/*" multiple onChange={onUpload} disabled={busy} />
-      {busy && <p className="text-text-muted text-sm mt-2">Uploading…</p>}
+      <input type="file" accept="image/*" multiple onChange={onUpload} disabled={busy} aria-label="Upload photos" />
+      {busy && <p className="text-text-muted text-sm mt-2" role="status" aria-live="polite">Uploading…</p>}
       {error && <p className="text-status-cancelled text-sm mt-2">{error}</p>}
       <div className="grid grid-cols-3 gap-3 mt-4">
         {photos.map((p) => (

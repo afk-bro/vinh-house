@@ -71,19 +71,25 @@ export function ToastProvider({ children }: ToastProviderProps) {
     <ToastContext.Provider value={{ showToast }}>
       {children}
 
-      {/* Toast Container */}
-      <div className="fixed top-4 right-4 z-[100] space-y-2 pointer-events-none">
+      {/* Toast Container — announced to assistive tech as toasts appear/disappear. */}
+      <div
+        className="fixed top-4 right-4 z-[100] space-y-2 pointer-events-none"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {toasts.map((toast) => (
           <div
             key={toast.id}
             data-testid="toast"
             data-variant={toast.type}
             data-message={toast.message}
+            role={toast.type === "error" ? "alert" : "status"}
             className={`px-4 py-3 rounded-lg border shadow-lg flex items-center gap-2 min-w-[300px] max-w-md animate-slide-in pointer-events-auto ${getToastStyles(
               toast.type
             )}`}
           >
-            <span className="text-lg font-bold">{getIcon(toast.type)}</span>
+            <span className="text-lg font-bold" aria-hidden="true">{getIcon(toast.type)}</span>
             <span className="flex-1 text-sm font-medium">{toast.message}</span>
           </div>
         ))}

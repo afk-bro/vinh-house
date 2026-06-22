@@ -15,6 +15,18 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNext, o
   const currentImage = images[currentIndex];
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  // Touch-swipe navigation: a horizontal swipe of >50px moves to the next/previous image.
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0]?.clientX ?? null;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || images.length < 2) return;
+    const dx = (e.changedTouches[0]?.clientX ?? touchStartX.current) - touchStartX.current;
+    if (Math.abs(dx) > 50) (dx < 0 ? onNext : onPrevious)();
+    touchStartX.current = null;
+  };
 
   // Keyboard: Esc closes, arrows navigate, Tab is trapped within the dialog.
   useEffect(() => {
@@ -59,6 +71,8 @@ export default function ImageLightbox({ images, currentIndex, onClose, onNext, o
       role="dialog"
       aria-modal="true"
       aria-label={currentImage.alt || "Image gallery"}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
     >
       {/* Close button */}
