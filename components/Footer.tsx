@@ -24,7 +24,7 @@ export default async function Footer() {
       <footer className="bg-[var(--color-primary-dark)]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-12 pt-2 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
         <div className="flex items-start gap-3">
-          <Image src="/logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
+          <Image src="/v-logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
           <div>
             <p className="font-heading text-2xl text-[var(--color-accent-gold)]">{t('brand.name')}</p>
             <p className="mt-1 max-w-md text-sm text-[#FFF8ED]/80">{t('brand.footerTagline')}</p>
