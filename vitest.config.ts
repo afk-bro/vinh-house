@@ -8,4 +8,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('.', import.meta.url)),
     },
   },
+  test: {
+    // Normalize SITE_URL-affecting env vars before any test module loads (see vitest.setup.ts).
+    setupFiles: ['./vitest.setup.ts'],
+  },
 });

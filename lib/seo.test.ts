@@ -1,21 +1,26 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { localePrefix, localeAlternates } from './seo';
 
-// SITE_URL is resolved at module load from NEXT_PUBLIC_SITE_URL, so each case controls
-// the env explicitly and re-imports the module — never relying on the ambient env (a dev
-// or .env.local with the var set must not flip these results).
+// SITE_URL is resolved at module load from env (NEXT_PUBLIC_SITE_URL, then Vercel's domain), so
+// each case controls the env explicitly and re-imports the module — never relying on the ambient
+// env. vitest.setup.ts clears these vars before the file loads; each test sets what it needs.
 describe('SITE_URL', () => {
-  const original = process.env.NEXT_PUBLIC_SITE_URL;
+  const KEYS = ['NEXT_PUBLIC_SITE_URL', 'VERCEL_PROJECT_PRODUCTION_URL', 'VERCEL_URL'] as const;
+  const originals = Object.fromEntries(KEYS.map((k) => [k, process.env[k]]));
+
+  const clearAll = () => KEYS.forEach((k) => delete process.env[k]);
 
   afterEach(() => {
     vi.unstubAllEnvs();
-    if (original === undefined) delete process.env.NEXT_PUBLIC_SITE_URL;
-    else process.env.NEXT_PUBLIC_SITE_URL = original;
+    for (const k of KEYS) {
+      if (originals[k] === undefined) delete process.env[k];
+      else process.env[k] = originals[k];
+    }
     vi.resetModules();
   });
 
-  it('falls back to the placeholder origin (no trailing slash) when env is unset', async () => {
-    delete process.env.NEXT_PUBLIC_SITE_URL;
+  it('falls back to the placeholder origin (no trailing slash) when nothing is set', async () => {
+    clearAll();
     vi.resetModules();
     const { SITE_URL } = await import('./seo');
     expect(SITE_URL).toBe('https://vinh-house.example');
@@ -23,7 +28,25 @@ describe('SITE_URL', () => {
   });
 
   it('strips a trailing slash from NEXT_PUBLIC_SITE_URL', async () => {
+    clearAll();
     vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://vinh-house.com/');
+    vi.resetModules();
+    const { SITE_URL } = await import('./seo');
+    expect(SITE_URL).toBe('https://vinh-house.com');
+  });
+
+  it('derives the origin from Vercel\'s production domain when NEXT_PUBLIC_SITE_URL is unset', async () => {
+    clearAll();
+    vi.stubEnv('VERCEL_PROJECT_PRODUCTION_URL', 'vinh-house.vercel.app');
+    vi.resetModules();
+    const { SITE_URL } = await import('./seo');
+    expect(SITE_URL).toBe('https://vinh-house.vercel.app');
+  });
+
+  it('prefers NEXT_PUBLIC_SITE_URL over the Vercel domain when both are set', async () => {
+    clearAll();
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://vinh-house.com');
+    vi.stubEnv('VERCEL_PROJECT_PRODUCTION_URL', 'vinh-house.vercel.app');
     vi.resetModules();
     const { SITE_URL } = await import('./seo');
     expect(SITE_URL).toBe('https://vinh-house.com');

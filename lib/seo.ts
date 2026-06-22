@@ -2,11 +2,23 @@
 import { routing } from '@/i18n/routing';
 
 /**
- * Absolute site origin, with any trailing slash stripped so callers can safely concatenate
- * `${SITE_URL}${path}` without risking `https://host//path`. Falls back to a placeholder
- * origin in dev/test when NEXT_PUBLIC_SITE_URL is unset (next.config warns at build time).
+ * Absolute site origin (no trailing slash), resolved in priority order:
+ *  1. `NEXT_PUBLIC_SITE_URL` — set this for a custom/production domain.
+ *  2. Vercel's platform domain (`VERCEL_PROJECT_PRODUCTION_URL`, else the per-deploy
+ *     `VERCEL_URL`) — bare hostnames, so we prepend `https://`. Lets the first/preview
+ *     Vercel deploy work with no env config.
+ *  3. A placeholder origin for local dev/test (next.config fails a real prod build that
+ *     can resolve none of the above).
  */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example').replace(/\/+$/, '');
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/+$/, '');
+  const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  if (vercelHost) return `https://${vercelHost.replace(/\/+$/, '')}`;
+  return 'https://vinh-house.example';
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 /**
  * URL prefix for a locale, derived from the routing config so it stays in sync
