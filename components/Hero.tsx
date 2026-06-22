@@ -8,6 +8,13 @@ export default async function Hero() {
     <section className="relative flex min-h-[500px] items-center justify-center overflow-hidden sm:min-h-[560px]">
       <Image src="/hero.jpg" alt={t('hero.imageAlt')} fill priority sizes="100vw" className="hero-kenburns object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,118,110,0.55)] via-[rgba(15,118,110,0.30)] to-[rgba(255,248,237,0.25)]" />
+      {/* Radial scrim: darkens the busy image directly behind the centered text for
+          legibility, fading to transparent so the skyline stays bright at the edges. */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: 'radial-gradient(ellipse 75% 65% at 50% 48%, rgba(15,42,45,0.62) 0%, rgba(15,42,45,0.32) 42%, rgba(15,42,45,0) 72%)' }}
+      />
       <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
         <h1 className="hero-rise font-heading text-5xl font-semibold text-white drop-shadow-sm sm:text-7xl" style={{ animationDelay: '0.05s' }}>{t('brand.name')}</h1>
         <p className="hero-rise mt-4 text-xl text-white/95 [text-shadow:0_1px_10px_rgba(15,58,61,0.55)] sm:text-2xl" style={{ animationDelay: '0.15s' }}>{t('hero.headline')}</p>
