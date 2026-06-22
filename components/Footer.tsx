@@ -23,19 +23,19 @@ export default async function Footer() {
       </div>
       <footer className="bg-[var(--color-primary-dark)]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-12 pt-2 sm:flex-row sm:items-start sm:justify-between sm:px-6 lg:px-8">
-        <div className="flex items-start gap-3">
-          <Image src="/v_logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
-          <div>
-            <p className="font-heading text-2xl text-[var(--color-accent-gold)]">{t('brand.name')}</p>
-            <p className="mt-1 max-w-md text-sm text-[#FFF8ED]/80">{t('brand.footerTagline')}</p>
+          <div className="flex items-start gap-3">
+            <Image src="/v_logo.png" alt="Vĩnh House logo" width={44} height={44} className="rounded" />
+            <div>
+              <p className="font-heading text-2xl text-[var(--color-accent-gold)]">{t('brand.name')}</p>
+              <p className="mt-1 max-w-md text-sm text-[#FFF8ED]/80">{t('brand.footerTagline')}</p>
+            </div>
           </div>
-        </div>
-        <nav className="flex flex-col gap-2">
-          {mail && <a className={link} href={mail}><Mail className="h-4 w-4" aria-hidden />{contacts.email}</a>}
-          {tel && <a className={link} href={tel}><Phone className="h-4 w-4" aria-hidden />{contacts.phone}</a>}
-          {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="h-4 w-4" />{t('booking.whatsapp')}</a>}
-          {zalo && <a className={link} href={zalo} target="_blank" rel="noopener noreferrer"><ZaloIcon className="h-4 w-4" />{t('booking.zalo')}</a>}
-          {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer"><FacebookIcon className="h-4 w-4" />{t('booking.facebook')}</a>}
+          <nav className="flex flex-col gap-2">
+            {mail && <a className={link} href={mail}><Mail className="h-4 w-4" aria-hidden />{contacts.email}</a>}
+            {tel && <a className={link} href={tel}><Phone className="h-4 w-4" aria-hidden />{contacts.phone}</a>}
+            {wa && <a className={link} href={wa} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="h-4 w-4" />{t('booking.whatsapp')}</a>}
+            {zalo && <a className={link} href={zalo} target="_blank" rel="noopener noreferrer"><ZaloIcon className="h-4 w-4" />{t('booking.zalo')}</a>}
+            {contacts.facebook && <a className={link} href={contacts.facebook} target="_blank" rel="noopener noreferrer"><FacebookIcon className="h-4 w-4" />{t('booking.facebook')}</a>}
           </nav>
         </div>
       </footer>
