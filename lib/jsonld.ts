@@ -6,7 +6,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example';
 /** Resolves a content path (relative or absolute) to an absolute URL. */
 function absUrl(path: string): string {
   if (!path) return BASE;
-  if (path.startsWith('http')) return path;
+  if (/^https?:\/\//.test(path)) return path;
   return `${BASE}${path.startsWith('/') ? '' : '/'}${path}`;
 }
 
@@ -26,7 +26,7 @@ type LodgingInput = {
 
 /** Builds a JSON.stringify-ready LodgingBusiness object for a building or room page. */
 export function lodgingJsonLd(input: LodgingInput): string {
-  const url = `${BASE}${localePrefix(input.locale)}${input.path}` || BASE;
+  const url = absUrl(`${localePrefix(input.locale)}${input.path}`);
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
