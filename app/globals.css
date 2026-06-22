@@ -181,9 +181,16 @@ html {
 body {
   /* Gentle full-page warm gradient (ivory at top → soft sand toward the bottom) so the page
      reads with a subtle top-to-bottom shift instead of one flat ivory. Spans the whole
-     document (not fixed) so it's directional rather than a uniform tint; noise grain on top. */
+     document (not fixed) so it's directional rather than a uniform tint; noise grain on top.
+     Composed from existing surface tokens — no one-off colors (design-system rule). */
   background-color: var(--color-brand-forest);
-  background-image: linear-gradient(180deg, #FFF8ED 0%, #FFF8ED 22%, #FCF3E1 60%, #F8ECD2 100%);
+  background-image: linear-gradient(
+    180deg,
+    var(--color-brand-forest) 0%,
+    var(--color-brand-forest) 22%,
+    var(--color-surface-elevated) 60%,
+    var(--color-surface-secondary) 100%
+  );
   background-repeat: no-repeat;
   color: var(--color-text-primary);
   font-family: var(--font-body);
