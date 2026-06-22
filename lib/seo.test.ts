@@ -1,20 +1,32 @@
-import { describe, it, expect, vi } from 'vitest';
-import { localePrefix, localeAlternates, SITE_URL } from './seo';
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { localePrefix, localeAlternates } from './seo';
 
+// SITE_URL is resolved at module load from NEXT_PUBLIC_SITE_URL, so each case controls
+// the env explicitly and re-imports the module — never relying on the ambient env (a dev
+// or .env.local with the var set must not flip these results).
 describe('SITE_URL', () => {
-  it('falls back to the placeholder origin (no trailing slash) when env is unset', () => {
-    // NEXT_PUBLIC_SITE_URL is unset in the test env.
+  const original = process.env.NEXT_PUBLIC_SITE_URL;
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    if (original === undefined) delete process.env.NEXT_PUBLIC_SITE_URL;
+    else process.env.NEXT_PUBLIC_SITE_URL = original;
+    vi.resetModules();
+  });
+
+  it('falls back to the placeholder origin (no trailing slash) when env is unset', async () => {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
+    vi.resetModules();
+    const { SITE_URL } = await import('./seo');
     expect(SITE_URL).toBe('https://vinh-house.example');
     expect(SITE_URL.endsWith('/')).toBe(false);
   });
 
   it('strips a trailing slash from NEXT_PUBLIC_SITE_URL', async () => {
-    vi.resetModules();
     vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://vinh-house.com/');
-    const { SITE_URL: stripped } = await import('./seo');
-    expect(stripped).toBe('https://vinh-house.com');
-    vi.unstubAllEnvs();
     vi.resetModules();
+    const { SITE_URL } = await import('./seo');
+    expect(SITE_URL).toBe('https://vinh-house.com');
   });
 });
 
