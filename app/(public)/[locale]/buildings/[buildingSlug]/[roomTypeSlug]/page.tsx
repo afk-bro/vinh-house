@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import { headers } from 'next/headers';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
@@ -11,7 +10,7 @@ import LocationSection from '@/components/room/LocationSection';
 import AroundSection from '@/components/room/AroundSection';
 import Faq from '@/components/room/Faq';
 import { getBuildings, getBuilding, getRoom, getFaq } from '@/lib/content';
-import { localeAlternates } from '@/lib/seo';
+import { localeAlternates, localePrefix } from '@/lib/seo';
 import { lodgingJsonLd } from '@/lib/jsonld';
 import { contacts } from '@/lib/content/site';
 import type { Locale } from '@/i18n/routing';
@@ -47,11 +46,10 @@ export default async function RoomPage(
   if (!building || building.comingSoon || !room) notFound();
   const t = await getTranslations();
 
-  const h = await headers();
-  const host = h.get('host') ?? '';
-  const proto = h.get('x-forwarded-proto') ?? 'https';
-  const localePrefix = locale === 'en' ? '' : locale === 'zh-Hans' ? '/zh' : `/${locale}`;
-  const url = host ? `${proto}://${host}${localePrefix}/buildings/${buildingSlug}/${roomTypeSlug}` : '';
+  // Build the absolute page URL from config (all known at build time) so this page can
+  // be statically generated — reading headers() here would force per-request SSR.
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example';
+  const url = `${base}${localePrefix(locale)}/buildings/${buildingSlug}/${roomTypeSlug}`;
   const message = t('inquiry.room', { roomType: room.name, building: building.name, url });
   const faq = getFaq(locale as Locale);
 
@@ -83,7 +81,7 @@ export default async function RoomPage(
         </span>
       </div>
       <p className="mt-4 max-w-2xl text-text-secondary">{room.blurb}</p>
-      <div className="mt-6"><RoomGallery images={room.images} /></div>
+      <div className="mt-6"><RoomGallery images={room.images} emptyLabel={t('room.photosComingSoon')} /></div>
       <div className="mt-8"><BookNowButton /></div>
 
       <Amenities amenities={building.amenities} />

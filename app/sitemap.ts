@@ -9,7 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const urls: MetadataRoute.Sitemap = [];
   for (const locale of routing.locales) {
     const p = localePrefix(locale);
-    urls.push({ url: `${BASE}${p}`, priority: 1 });
+    // Use `/` for the default (unprefixed) locale so the home URL matches its canonical.
+    urls.push({ url: `${BASE}${p || '/'}`, priority: 1 });
     for (const b of getBuildings(locale)) {
       urls.push({ url: `${BASE}${p}/buildings/${b.slug}` });
       if (!b.comingSoon) {
