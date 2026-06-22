@@ -29,7 +29,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example'),
     title: { default: t('homeTitle'), template: `%s — ${t('titleSuffix')}` },
     description: t('homeDescription'),
-    icons: { icon: '/logo.png' },
     alternates: localeAlternates(locale),
     openGraph: { title: t('homeTitle'), description: t('homeDescription'), images: ['/hero.jpg'], type: 'website' },
   };
