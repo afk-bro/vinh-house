@@ -13,7 +13,7 @@ export default async function Hero() {
       <div
         aria-hidden
         className="absolute inset-0"
-        style={{ background: 'radial-gradient(ellipse 75% 65% at 50% 48%, rgba(15,42,45,0.62) 0%, rgba(15,42,45,0.32) 42%, rgba(15,42,45,0) 72%)' }}
+        style={{ background: 'radial-gradient(ellipse 96% 72% at 50% 48%, rgba(15,42,45,0.80) 0%, rgba(15,42,45,0.64) 48%, rgba(15,42,45,0.34) 70%, rgba(15,42,45,0) 90%)' }}
       />
       <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
         <h1 className="hero-rise font-heading text-5xl font-semibold text-white drop-shadow-sm sm:text-7xl" style={{ animationDelay: '0.05s' }}>{t('brand.name')}</h1>
