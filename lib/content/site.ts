@@ -1,6 +1,9 @@
 import type { BuildingMeta, Contacts } from './types';
 
-// ⚠️ PLACEHOLDERS — replace with real values when the client provides them.
+// phone / whatsapp / motorbikeUrl are the client's real values (see
+// public/Phap_photos_raw/Gilda-Hotel/Information.txt). email and facebook are still
+// ⚠️ PLACEHOLDERS — supply real values when the client provides them (they're blanked
+// below until then so the footer/contact sections omit those rows).
 const rawContacts: Contacts = {
   email: 'CHANGEME@example.com',
   phone: '+84 92 442 22 99',
