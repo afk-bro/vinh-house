@@ -179,7 +179,12 @@ html {
 }
 
 body {
-  background: var(--color-brand-forest);
+  /* Gentle full-page warm gradient (ivory at top → soft sand toward the bottom) so the page
+     reads with a subtle top-to-bottom shift instead of one flat ivory. Spans the whole
+     document (not fixed) so it's directional rather than a uniform tint; noise grain on top. */
+  background-color: var(--color-brand-forest);
+  background-image: linear-gradient(180deg, #FFF8ED 0%, #FFF8ED 22%, #FCF3E1 60%, #F8ECD2 100%);
+  background-repeat: no-repeat;
   color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: 1rem; /* 16px - tightened for a cleaner, modern feel */
