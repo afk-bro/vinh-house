@@ -3,20 +3,28 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const IMAGE_RE = /\.(jpe?g|png|webp)$/i;
+// A cover file is `cover.<ext>` in any supported format (not just .jpg).
+const COVER_RE = /^cover\.(jpe?g|png|webp)$/i;
 
 function isDir(p: string): boolean {
   return fs.existsSync(p) && fs.statSync(p).isDirectory();
 }
 
-/** Image filenames in a folder, sorted alphabetically but with cover.jpg first. */
+/** Whether a folder contains a cover image (cover.jpg/jpeg/png/webp). */
+function hasCoverFile(dir: string): boolean {
+  return isDir(dir) && fs.readdirSync(dir).some((f) => COVER_RE.test(f));
+}
+
+/** Image filenames in a folder, sorted alphabetically but with the cover image first. */
 export function listImages(dir: string): string[] {
   if (!isDir(dir)) return [];
   return fs
     .readdirSync(dir)
     .filter((f) => IMAGE_RE.test(f))
     .sort((a, b) => {
-      if (a === 'cover.jpg') return b === 'cover.jpg' ? 0 : -1;
-      if (b === 'cover.jpg') return 1;
+      const aCover = COVER_RE.test(a);
+      const bCover = COVER_RE.test(b);
+      if (aCover !== bCover) return aCover ? -1 : 1;
       return a.localeCompare(b);
     });
 }
@@ -39,11 +47,11 @@ export function scanDisk(baseDir: string): DiskBuilding[] {
         .sort()
         .map((roomFolder) => ({
           folder: roomFolder,
-          hasCover: fs.existsSync(path.join(dir, roomFolder, 'cover.jpg')),
+          hasCover: hasCoverFile(path.join(dir, roomFolder)),
         }));
       return {
         folder,
-        hasCover: fs.existsSync(path.join(dir, 'cover.jpg')),
+        hasCover: hasCoverFile(dir),
         rooms,
       };
     });

@@ -7,11 +7,10 @@ import WhatsAppIcon from './icons/WhatsAppIcon';
 import ZaloIcon from './icons/ZaloIcon';
 import { contacts } from '@/lib/content/site';
 import { whatsappUrl, telUrl, zaloUrl } from '@/lib/contacts';
-import { inquiryMessage } from '@/lib/content/inquiry';
 
 export default async function ContactSection() {
   const t = await getTranslations();
-  const wa = whatsappUrl(contacts.whatsapp, inquiryMessage({}));
+  const wa = whatsappUrl(contacts.whatsapp, t('inquiry.generic'));
   const zalo = zaloUrl(contacts.whatsapp);
   const tel = telUrl(contacts.phone);
   return (

@@ -43,7 +43,7 @@ export function validateContent(meta: BuildingMeta[], disk: DiskBuilding[]): Val
       continue; // coming-soon buildings are exempt from cover/room checks below
     }
 
-    if (!d.hasCover) errors.push(`Building "${b.folder}" is missing cover.jpg`);
+    if (!d.hasCover) errors.push(`Building "${b.folder}" is missing a cover image (cover.jpg/png/webp)`);
 
     // Room slug uniqueness within building
     const roomSeen = new Set<string>();
@@ -60,7 +60,7 @@ export function validateContent(meta: BuildingMeta[], disk: DiskBuilding[]): Val
       if (!metaRoomFolders.has(dr.folder)) {
         errors.push(`Room folder "${dr.folder}" in "${b.folder}" has no metadata`);
       }
-      if (!dr.hasCover) errors.push(`Room "${dr.folder}" in "${b.folder}" is missing cover.jpg`);
+      if (!dr.hasCover) errors.push(`Room "${dr.folder}" in "${b.folder}" is missing a cover image (cover.jpg/png/webp)`);
     }
     for (const r of b.rooms) {
       if (!diskRoomFolders.has(r.slug)) {
