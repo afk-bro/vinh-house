@@ -10,14 +10,16 @@
     "bookNow": "Book now",
     "selectLanguage": "Select language",
     "comingSoon": "Coming soon",
-    "menu": "Menu"
+    "menu": "Menu",
+    "skipToContent": "Skip to content"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "Phone", "facebook": "Facebook", "email": "Email", "zalo": "Zalo", "call": "Call" },
   "contact": { "eyebrow": "Get in touch", "heading": "Ready to check availability?", "subtitle": "Message us directly for rooms, prices, and monthly stays." },
   "hero": {
     "headline": "Comfortable apartments and hotel rentals in Da Nang",
     "tagline": "Book direct, message the owner, and find your stay with less hassle.",
-    "viewApartments": "View apartments"
+    "viewApartments": "View apartments",
+    "imageAlt": "Da Nang skyline at dusk"
   },
   "valueProps": {
     "bookDirect": { "title": "Book direct, pay less", "body": "No platform fees or middlemen — message us directly." },
@@ -35,7 +37,7 @@
     "comingSoonTitle": "Details coming soon",
     "comingSoonBody": "We're preparing the listings for this building."
   },
-  "room": { "available": "Available", "notAvailable": "Not available", "perNight": "per night" },
+  "room": { "available": "Available", "notAvailable": "Not available", "perNight": "per night", "photosComingSoon": "Photos coming soon" },
   "cta": {
     "readyToBook": "Ready to find your room in Da Nang?",
     "readyToBookBody": "Message us directly and we'll help you choose the best option."
@@ -59,5 +61,10 @@
     "aroundHeading": "Around the apartment",
     "approx": "Approx.",
     "faqHeading": "Frequently asked"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or may have moved.",
+    "home": "Back to home"
   }
 }

@@ -1,7 +1,5 @@
 // lib/jsonld.ts — schema.org LodgingBusiness structured data for SEO rich results.
-import { localePrefix } from './seo';
-
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vinh-house.example';
+import { localePrefix, SITE_URL as BASE } from './seo';
 
 /** Resolves a content path (relative or absolute) to an absolute URL. */
 function absUrl(path: string): string {

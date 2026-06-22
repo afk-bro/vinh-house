@@ -11,7 +11,7 @@ export default async function ScooterBand() {
         <Reveal>
           <div className="flex flex-col items-center gap-5 text-center">
             <div>
-              <h3 className="font-heading text-3xl text-[var(--color-primary-dark)]">{t('title')}</h3>
+              <h2 className="font-heading text-3xl text-[var(--color-primary-dark)]">{t('title')}</h2>
               <p className="mt-1 text-text-secondary">{t('body')}</p>
             </div>
             <a href={contacts.motorbikeUrl} target="_blank" rel="noopener noreferrer"

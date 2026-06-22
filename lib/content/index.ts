@@ -1,4 +1,5 @@
 // lib/content/index.ts
+import { cache } from 'react';
 import type { BuildingMeta } from './types';
 import { listImages, imageUrl, PHOTOS_BASE, scanDisk } from './loader';
 import { pick } from './localize';
@@ -61,20 +62,22 @@ function imagesMapFor(meta: BuildingMeta): Record<string, string[]> {
   return map;
 }
 
-export function getBuildings(locale: Locale): ResolvedBuilding[] {
+// Wrapped in React `cache()` so the synchronous disk scan (imagesMapFor) runs at most once
+// per locale per request — pages that call getBuilding + getRoom no longer scan twice.
+export const getBuildings = cache((locale: Locale): ResolvedBuilding[] => {
   return buildings
     .filter((b) => !b.hidden)
     .sort((a, b) => a.sortOrder - b.sortOrder)
     .map((b) => resolveBuilding(b, locale, imagesMapFor(b)));
-}
+});
 
-export function getBuilding(slug: string, locale: Locale): ResolvedBuilding | undefined {
+export const getBuilding = cache((slug: string, locale: Locale): ResolvedBuilding | undefined => {
   return getBuildings(locale).find((b) => b.slug === slug);
-}
+});
 
-export function getRoom(buildingSlug: string, roomSlug: string, locale: Locale): ResolvedRoom | undefined {
+export const getRoom = cache((buildingSlug: string, roomSlug: string, locale: Locale): ResolvedRoom | undefined => {
   return getBuilding(buildingSlug, locale)?.resolvedRooms.find((r) => r.slug === roomSlug);
-}
+});
 
 export { scanDisk, PHOTOS_BASE };
 export { getFaq } from './faq';

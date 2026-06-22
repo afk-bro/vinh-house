@@ -1,12 +1,29 @@
 import type { BuildingMeta, Contacts } from './types';
 
-// ⚠️ PLACEHOLDERS — replace with real values when the client provides them.
-export const contacts: Contacts = {
+// phone / whatsapp / motorbikeUrl are the client's real values (see
+// public/Phap_photos_raw/Gilda-Hotel/Information.txt). email and facebook are still
+// ⚠️ PLACEHOLDERS — supply real values when the client provides them (they're blanked
+// below until then so the footer/contact sections omit those rows).
+const rawContacts: Contacts = {
   email: 'CHANGEME@example.com',
   phone: '+84 92 442 22 99',
   whatsapp: '+84 92 442 22 99',
   facebook: 'https://facebook.com/CHANGEME',
   motorbikeUrl: 'https://vinhphatmotorbikes.com',
+};
+
+/** A value is a placeholder if it's empty or still contains the CHANGEME/example sentinel. */
+const isPlaceholder = (v: string | null | undefined): boolean => !v || /CHANGEME|example\.(com|org)/i.test(v);
+
+/**
+ * Public contacts. Placeholder email/Facebook are blanked so the footer and contact
+ * sections omit those rows until real values are supplied (consumers already guard on
+ * falsy). Replace the values in `rawContacts` above and the rows reappear automatically.
+ */
+export const contacts: Contacts = {
+  ...rawContacts,
+  email: isPlaceholder(rawContacts.email) ? '' : rawContacts.email,
+  facebook: isPlaceholder(rawContacts.facebook) ? '' : rawContacts.facebook,
 };
 
 export const buildings: BuildingMeta[] = [

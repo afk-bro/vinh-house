@@ -6,7 +6,7 @@ export default async function Hero() {
   const t = await getTranslations();
   return (
     <section className="relative flex min-h-[500px] items-center justify-center overflow-hidden sm:min-h-[560px]">
-      <Image src="/hero.jpg" alt="Da Nang skyline" fill priority sizes="100vw" className="hero-kenburns object-cover" />
+      <Image src="/hero.jpg" alt={t('hero.imageAlt')} fill priority sizes="100vw" className="hero-kenburns object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,118,110,0.55)] via-[rgba(15,118,110,0.30)] to-[rgba(255,248,237,0.25)]" />
       <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
         <h1 className="hero-rise font-heading text-5xl font-semibold text-white drop-shadow-sm sm:text-7xl" style={{ animationDelay: '0.05s' }}>{t('brand.name')}</h1>

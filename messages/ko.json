@@ -10,14 +10,16 @@
     "bookNow": "지금 예약",
     "selectLanguage": "언어 선택",
     "comingSoon": "준비 중",
-    "menu": "메뉴"
+    "menu": "메뉴",
+    "skipToContent": "본문으로 건너뛰기"
   },
   "booking": { "whatsapp": "WhatsApp", "phone": "전화", "facebook": "Facebook", "email": "이메일", "zalo": "Zalo", "call": "전화" },
   "contact": { "eyebrow": "문의하기", "heading": "빈방을 확인할 준비가 되셨나요?", "subtitle": "객실, 가격, 월 단위 숙박은 직접 메시지로 문의하세요." },
   "hero": {
     "headline": "다낭의 편안한 아파트 및 호텔 렌탈",
     "tagline": "직접 예약하고, 주인에게 문의하고, 번거로움 없이 숙소를 찾으세요.",
-    "viewApartments": "아파트 보기"
+    "viewApartments": "아파트 보기",
+    "imageAlt": "황혼 무렵의 다낭 스카이라인"
   },
   "valueProps": {
     "bookDirect": { "title": "직접 예약하고 더 저렴하게", "body": "플랫폼 수수료나 중개인 없이 — 저희에게 직접 문의하세요." },
@@ -42,7 +44,7 @@
     "comingSoonTitle": "세부 정보 준비 중",
     "comingSoonBody": "이 건물의 목록을 준비하고 있습니다."
   },
-  "room": { "available": "이용 가능", "notAvailable": "이용 불가", "perNight": "1박당" },
+  "room": { "available": "이용 가능", "notAvailable": "이용 불가", "perNight": "1박당", "photosComingSoon": "사진 준비 중입니다" },
   "cta": {
     "readyToBook": "다낭에서 객실을 찾을 준비가 되셨나요?",
     "readyToBookBody": "저희에게 직접 문의하시면 가장 좋은 옵션을 선택하도록 도와드리겠습니다."
@@ -66,5 +68,10 @@
     "aroundHeading": "아파트 주변",
     "approx": "약",
     "faqHeading": "자주 묻는 질문"
+  },
+  "notFound": {
+    "title": "페이지를 찾을 수 없습니다",
+    "body": "찾으시는 페이지가 존재하지 않거나 이동되었을 수 있습니다.",
+    "home": "홈으로 돌아가기"
   }
 }
